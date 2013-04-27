@@ -37,6 +37,8 @@ class MenuItem(Model):
 	width = IntegerField(null=False, blank=False, editable=True)
 	root_article = ForeignKey(	"Article", null=False, blank=False,
 								editable=True, related_name='+')
+	def __unicode__(self):
+		return unicode(self.root_article)
 
 class Article(Model):
 
@@ -58,6 +60,12 @@ class Article(Model):
 	sub_articles_list_bottom = BooleanField(editable=True)
 	hide = BooleanField(editable=True)
 
+	def __unicode__(self):
+		if self.hide:
+			return "(%s)" % unicode(self.headline)
+		else:
+			return unicode(self.headline)
+
 class Attachment(Model):
 	name = CharField(	null=False, blank=False, editable=True,
 								max_length=64)
@@ -65,3 +73,6 @@ class Attachment(Model):
 								max_length=256)
 	data = FileField(	blank=False, editable=True,
 						upload_to="attachments", max_length=256)
+
+	def __unicode__(self):
+		return self.name
