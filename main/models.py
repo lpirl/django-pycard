@@ -48,6 +48,9 @@ class Article(Model):
 	slug = CharField(	null=False, blank=False, editable=True,
 						max_length=64)
 
+	parent = ForeignKey(	"self", null=True, blank=True, editable=True,
+							related_name='children')
+
 	teaser = CharField(	null=False, blank=True, editable=True,
 						max_length=256)
 
