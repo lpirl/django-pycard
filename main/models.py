@@ -6,7 +6,7 @@ class Configuration(Model):
 	"""
 	Holds global options.
 	"""
-	option = CharField(	primary_key=True,
+	key = CharField(	primary_key=True,
 						max_length=64,
 						null=False,
 						blank=False,
@@ -16,19 +16,19 @@ class Configuration(Model):
 	comment = TextField(blank=True)
 
 	@staticmethod
-	def get_str(option):
-		return Configuration.objects.get_or_create(option=option)[0].value
+	def get_str(key):
+		return Configuration.objects.get_or_create(key=key)[0].value
 
 	@staticmethod
-	def get_int(option):
-		return int(Configuration.get_str(option) or 0)
+	def get_int(key):
+		return int(Configuration.get_str(key) or 0)
 
 	@staticmethod
-	def get_decimal(option):
-		return Decimal(Configuration.get_str(option) or 0)
+	def get_decimal(key):
+		return Decimal(Configuration.get_str(key) or 0)
 
 	def __unicode__(self):
-		return unicode('%s : %s' % (self.option, self.value))
+		return unicode('%s : %s' % (self.key, self.value))
 
 class MenuItem(Model):
 	pos_x = IntegerField(null=False, blank=False, editable=True)

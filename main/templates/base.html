@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load base_tags %}
+{% load configuration_tags %}
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +17,8 @@
 
 <meta name="robots" content="all">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="description" content="Lukas Pirl's Web site - IT, audio, photo">
+<meta	name="description"
+		content="Lukas Pirl's Web site - {% get_configuration_str 'uvp' %}">
 <meta name="author" content="Lukas Pirl">
 
 <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
@@ -28,8 +31,26 @@
 </head>
 
 <body>
+
+	{% generate_squares %}
+
 	<div id="main_container">
+
+			
+
+		<div id="logo">
+			<a	id="logo_name"
+				href="/"
+				title="home">
+					Lukas Pirl
+			</a>
+			<p id="logo_text">
+				{% get_configuration_str 'uvp' %}
+			</p>
+		</div>
+	
 		{% block content %}{% endblock %}
+		
 	</div>
 </body>
 
