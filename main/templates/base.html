@@ -1,0 +1,36 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+	{% block title_prefix %}{% endblock %}
+	Lukas Pirl
+	{% block title_postfix %}
+		- IT | audio | photo
+	{% endblock %}
+</title>
+
+<meta name="robots" content="all">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="description" content="Lukas Pirl's Web site - IT, audio, photo">
+<meta name="author" content="Lukas Pirl">
+
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<!--[if lt IE 7]>
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'ie_adjustments.css' %}">
+<![endif]-->
+
+</head>
+
+<body>
+	<div id="main_container">
+		{% block content %}{% endblock %}
+	</div>
+</body>
+
+</html>

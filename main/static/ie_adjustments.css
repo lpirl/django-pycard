@@ -1,0 +1,9 @@
+div.frameset_square{
+	display:none!important;
+}
+div#frameset_content{
+	 position:absolute!important;
+ 	 margin-left:auto!important;
+	 margin-right:auto!important;
+	 left:0px!important;
+}
