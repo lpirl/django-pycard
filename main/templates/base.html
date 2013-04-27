@@ -38,18 +38,18 @@
 
 		<div id="logo">
 			<a	id="logo_name"
-				href="/"
+				href="{% url 'main.views.index' %}"
 				title="home">
 					Lukas Pirl
 			</a>
 			<a	id="logo_text"
-				href="/"
+				href="{% url 'main.views.index' %}"
 				title="home">
 				{% get_configuration_str 'uvp' %}
 			</a>
 		</div>
 
-		{% generate_menu %}
+		{% generate_menu vertically_center_menu %}
 	
 		{% block content %}{% endblock %}
 		

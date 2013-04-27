@@ -33,8 +33,9 @@ def generate_squares():
 		}
 register.inclusion_tag('squares.html')(generate_squares)
 
-def generate_menu():
+def generate_menu(vertically_center=False):
 	return {
+		'vertically_center': vertically_center,
 		'items': MenuItem.objects.filter(root_article__hide=False)
 		}
 register.inclusion_tag('menu.html')(generate_menu)

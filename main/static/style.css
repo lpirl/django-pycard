@@ -23,9 +23,17 @@ div.square {
 }
 
 div#menu {
-	position: absolute;
-	top: 0;
-	left: 0;
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	height: 9em;
+	margin-left: -2em;
+}
+
+div#menu_spacer_vertically_center {
+	position: relative;
+	display: block;
+	height: 10em;
 }
 
 div#menu > a {
@@ -46,11 +54,10 @@ div#menu > a:hover {
 }
 
 div#logo {
-	display: inline-block;
-	width: 100%;
-	margin-left: -2em;
-	margin-top: 4em;
-	margin-bottom: 2em;
+	position: absolute;
+	top: 4em;
+	left: 0;
+	z-index: 100;
 }
 
 div#logo > a {
