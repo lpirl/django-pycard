@@ -1,10 +1,11 @@
 /* #################### BEGIN frameset #################### */
 body {
-	overflow: auto;
 	background-color: #fff;
 	color: #000;
 	font-family: sans-serif;
 	font-size: 0.9em;
+	margin: 0px;
+	padding:0px;
 }
 
 div#main_container {
@@ -12,7 +13,7 @@ div#main_container {
 	display: block;
 	width: 50em;
 	padding-left: 2em;
-	margin: 9em auto 1em auto;
+	margin: 1em auto;
 }
 
 div.square {
@@ -21,7 +22,13 @@ div.square {
 	border: 1px solid #d8d8d8;
 }
 
-a.menu {
+div#menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+div#menu > a {
 	position: absolute;
 	display: block;
 	text-align: center;
@@ -33,15 +40,22 @@ a.menu {
 	border: 1px solid #d8d8d8;
 }
 
-a:hover.menu {
+div#menu > a:hover {
 	background-color: #f7f7f7;
 	border: 1px solid #ff8000;
 }
 
 div#logo {
-	position: absolute;
+	display: inline-block;
+	width: 100%;
 	margin-left: -2em;
-	margin-top: -4.5em;
+	margin-top: 4em;
+	margin-bottom: 2em;
+}
+
+div#logo > a {
+	text-decoration: none;
+	display: block;
 }
 
 a#logo_name {
@@ -49,10 +63,9 @@ a#logo_name {
 	letter-spacing: 0.6em;
 	color: #cccccc;
 	font-weight: bolder;
-	text-decoration: none;
 }
 
-p#logo_text {
+a#logo_text {
 	margin: -0.2em 3em;
 	font-size: 0.8em;
 	color: #999999;

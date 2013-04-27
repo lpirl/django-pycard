@@ -1,0 +1,8 @@
+<div id="menu">
+	{% for item in items %}
+			<a	href="javascript:alert('todo');"
+				style="top: {{item.pos_y}}em; left: {{item.pos_x}}em; height: {{item.height}}em; line-height: {{item.height}}em; width: {{item.width}}em;">
+					{{ item.root_article.headline }}
+			</a>
+	{% endfor %}
+</div>

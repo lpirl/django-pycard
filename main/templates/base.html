@@ -36,18 +36,20 @@
 
 	<div id="main_container">
 
-			
-
 		<div id="logo">
 			<a	id="logo_name"
 				href="/"
 				title="home">
 					Lukas Pirl
 			</a>
-			<p id="logo_text">
+			<a	id="logo_text"
+				href="/"
+				title="home">
 				{% get_configuration_str 'uvp' %}
-			</p>
+			</a>
 		</div>
+
+		{% generate_menu %}
 	
 		{% block content %}{% endblock %}
 		
