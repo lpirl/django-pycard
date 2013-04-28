@@ -4,9 +4,9 @@
 
 <div id="menu">
 	{% for item in items %}
-			<a	href="{% url 'main.views.article' item.root_article.slug %}"
-				style="top: {{item.pos_y}}em; left: {{item.pos_x}}em; height: {{item.height}}em; line-height: {{item.height}}em; width: {{item.width}}em;">
-					{{ item.root_article.headline }}
-			</a>
+		<a	href="{% url 'main.views.article' item.root_article.slug %}"
+			style="top: {{item.pos_y}}em; left: {{item.pos_x}}em; height: {{item.height}}em; line-height: {{item.height}}em; width: {{item.width}}em;">
+				{{ item.root_article.headline }}
+		</a>
 	{% endfor %}
 </div>

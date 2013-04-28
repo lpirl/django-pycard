@@ -1,10 +1,12 @@
-<h2>Sub articles:</h2>
-<ul>
-{% for sub_article in sub_articles %}
-	<li>
-		<a href="{% url 'main.views.article' sub_article.slug %}">
-			{{ sub_article.headline }}
-		</a>
-	</li>
-{% endfor %}
-</ul>
+<div class="sub_articles_list">
+	<h2>Sub articles:</h2>
+	<ul>
+	{% for sub_article in sub_articles %}
+		<li>
+			<a href="{% url 'main.views.article' sub_article.slug %}">
+				{{ sub_article.headline }}
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+</div>

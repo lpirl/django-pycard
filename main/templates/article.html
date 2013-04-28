@@ -4,7 +4,9 @@
 
 {% block content %}
 
-<h1>{{ article.headline }}</h1>
+<div class="article">
+	
+<h1 class="article_headline">{{ article.headline }}</h1>
 
 {% if article.sub_articles_list_top and article.children.count > 0 %}
 	{% subarticles_list article.children.all %}
@@ -13,14 +15,18 @@
 {{article.content}}
 
 {% if article.attachments.count > 0 %}
-	<p>Attachments:</p>
-	{% for attachment in article.attachments.all %}
-		{{ attachment }}
-	{% endfor %}
+	<div class="attachements">
+		<p>Attachments:</p>
+		{% for attachment in article.attachments.all %}
+			{{ attachment }}
+		{% endfor %}
+	</div>
 {% endif %}
 
 {% if article.sub_articles_list_bottom and article.children.count > 0 %}
 	{% subarticles_list article.children.all %}
 {% endif %}
+
+</div>
 
 {% endblock content %}
