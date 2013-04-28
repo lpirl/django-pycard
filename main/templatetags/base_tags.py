@@ -6,7 +6,7 @@ from main.models import Configuration, MenuItem
 
 register = template.Library()
 
-def generate_squares():
+def squares():
 
 	def square_properties_generator():
 
@@ -30,12 +30,18 @@ def generate_squares():
 
 	return {
 		'squares': square_properties_generator()
-		}
-register.inclusion_tag('squares.html')(generate_squares)
+	}
+register.inclusion_tag('squares.html')(squares)
 
-def generate_menu(vertically_center=False):
+def menu(vertically_center=False):
 	return {
 		'vertically_center': vertically_center,
 		'items': MenuItem.objects.filter(root_article__hide=False)
-		}
-register.inclusion_tag('menu.html')(generate_menu)
+	}
+register.inclusion_tag('menu.html')(menu)
+
+def subarticles_list(sub_articles):
+	return {
+		'sub_articles': sub_articles
+	}
+register.inclusion_tag('subarticles_list.html')(subarticles_list)

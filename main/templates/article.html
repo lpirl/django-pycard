@@ -1,17 +1,26 @@
 {% extends "base.html" %}
 
+{% load base_tags %}
+
 {% block content %}
 
 <h1>{{ article.headline }}</h1>
 
+{% if article.sub_articles_list_top and article.children.count > 0 %}
+	{% subarticles_list article.children.all %}
+{% endif %}
+
 {{article.content}}
 
-{% if article.attachments.all.count > 0 %}
+{% if article.attachments.count > 0 %}
 	<p>Attachments:</p>
 	{% for attachment in article.attachments.all %}
 		{{ attachment }}
 	{% endfor %}
 {% endif %}
 
+{% if article.sub_articles_list_bottom and article.children.count > 0 %}
+	{% subarticles_list article.children.all %}
+{% endif %}
 
 {% endblock content %}
