@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
+{% load markup %}
 {% load base_tags %}
 
 {% block title_prefix %}{{ article.headline }} | {% endblock %}
 
-{% block content %}
+{% block content_container %}
 
 {% if article.sub_articles_list_top %}
 	<div class="sub_articles_list">
@@ -13,7 +14,7 @@
 {% endif %}
 
 <div class="content">
-	{{article.content}}
+	{{article.content | restructuredtext }}
 </div>
 
 {% if article.sub_articles_list_bottom %}
@@ -31,4 +32,4 @@
 	</div>
 {% endif %}
 
-{% endblock content %}
+{% endblock content_container %}

@@ -40,6 +40,7 @@ class MenuItem(Model):
 	def __unicode__(self):
 		return unicode(self.root_article)
 
+	
 class Article(Model):
 
 	headline = CharField(	null=False, blank=False, editable=True,
