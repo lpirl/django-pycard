@@ -2,17 +2,25 @@
 
 {% load base_tags %}
 
+{% block title_prefix %}{{ article.headline }} | {% endblock %}
+
 {% block content %}
 
-<div class="article">
-	
-<h1 class="article_headline">{{ article.headline }}</h1>
-
-{% if article.sub_articles_list_top and article.children.count > 0 %}
-	{% subarticles_list article.children.all %}
+{% if article.sub_articles_list_top %}
+	<div class="sub_articles_list">
+		{% subarticles_list article.visible_sub_articles  %}
+	</div>
 {% endif %}
 
-{{article.content}}
+<div class="content">
+	{{article.content}}
+</div>
+
+{% if article.sub_articles_list_bottom %}
+	<div class="sub_articles_list">
+		{% subarticles_list article.visible_sub_articles %}
+	</div>
+{% endif %}
 
 {% if article.attachments.count > 0 %}
 	<div class="attachements">
@@ -22,11 +30,5 @@
 		{% endfor %}
 	</div>
 {% endif %}
-
-{% if article.sub_articles_list_bottom and article.children.count > 0 %}
-	{% subarticles_list article.children.all %}
-{% endif %}
-
-</div>
 
 {% endblock content %}

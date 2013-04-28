@@ -1,5 +1,4 @@
-from django.contrib.admin import site
-from django.contrib.admin import ModelAdmin
+from django.contrib.admin import site, ModelAdmin
 from main.models import MenuItem, Article, Attachment, Configuration
 
 site.register(MenuItem, ModelAdmin)

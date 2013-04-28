@@ -1,6 +1,6 @@
 from django.db.models import (	Model, IntegerField, ForeignKey,
 								CharField, BooleanField, FileField,
-								ManyToManyField, TextField)
+								ManyToManyField, TextField, URLField)
 
 class Configuration(Model):
 	"""
@@ -56,12 +56,17 @@ class Article(Model):
 
 	content = TextField(null=False, blank=True, editable=True)
 
+	url = URLField(	null=False, blank=True, editable=True)
+
 	attachments = ManyToManyField(	"Attachment", blank=True,
 									editable=True)
 
 	sub_articles_list_top = BooleanField(editable=True)
 	sub_articles_list_bottom = BooleanField(editable=True)
 	hide = BooleanField(editable=True)
+
+	def visible_sub_articles(self):
+		return self.children.filter(hide=False)
 
 	def __unicode__(self):
 		if self.hide:
