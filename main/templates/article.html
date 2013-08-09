@@ -7,15 +7,21 @@
 
 {% block content_container %}
 
+{% block article_top %}{% endblock %}
+
 {% if article.sub_articles_list_top %}
 	<div class="sub_articles_list">
 		{% subarticles_list article.visible_sub_articles  %}
 	</div>
 {% endif %}
 
+{% block article_pre_content %}{% endblock %}
+
 <div class="content">
 	{{article.content | restructuredtext }}
 </div>
+
+{% block article_post_content %}{% endblock %}
 
 {% if article.sub_articles_list_bottom %}
 	<div class="sub_articles_list">
@@ -31,5 +37,7 @@
 		{% endfor %}
 	</div>
 {% endif %}
+
+{% block article_bottom %}{% endblock %}
 
 {% endblock content_container %}

@@ -18,3 +18,12 @@ def article(request, slug):
 		}
 	)
 
+def contact(request, slug):
+	return render(
+		request,
+		'contact.html',
+		{
+			'article': get_object_or_404(Article, slug=slug),
+		}
+	)
+
