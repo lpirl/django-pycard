@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.conf import settings
 
 from main.models import Article
 
@@ -25,8 +26,21 @@ def contact(request, slug):
 	form = ContactForm(data=request.POST or None)
 
 	if form.is_valid():
-		raise NotImplementedError
-		return HttpResponseRedirect('.')
+		from django.core.mail import EmailMessage
+		from django.contrib.sites.models import get_current_site
+
+		sender_string = form.get_sender_string()
+
+		email = EmailMessage(
+			form.get_subject(get_current_site(request).name),
+			form.cleaned_data['message'],
+			to = ['"%s" <%s>' % (a[0], a[1]) for a in settings.MANAGERS],
+			cc = [sender_string],
+            headers = {
+				'Reply-To': sender_string}
+		)
+		email.send()
+		return HttpResponseRedirect('./message_sent')
 
 	return render(
 		request,
