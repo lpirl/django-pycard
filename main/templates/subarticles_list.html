@@ -1,9 +1,11 @@
+{% load url_tags %}
+
 {% if sub_articles.count %}
 	<ul>
 	{% for sub_article in sub_articles %}
 		<li>
 			<a	class="headline"
-				href="{% url 'main.views.article' sub_article.slug %}">
+				href="{% article_url sub_article %}">
 				{{ sub_article.headline }}
 			</a>
 			<p class="teaser">

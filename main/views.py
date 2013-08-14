@@ -1,8 +1,37 @@
+from urlparse import urlsplit
+
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.conf import settings
 
 from main.models import Article
+
+def get_article_or_404(slug):
+	"""
+	Shortcut to retrieve Articles
+	"""
+	return get_object_or_404(Article, slug=slug)
+
+def slugs_from_request_path(request_path):
+	"""
+	Extracts a list of slugs from the request path.
+	"""
+	return filter(
+		lambda s: bool(s),
+		urlsplit(request_path)[2].split("/")
+	)
+
+def validate_slug_path_or_404(slug_path):
+	"""
+	Validates that request path equals parents slugs (recursively).
+	"""
+	parents = get_article_or_404(slug_path[-1]).parents()
+	parents_slug_path = [a.slug for a in parents]
+	parents_slug_path.reverse()
+
+	if slug_path[:-1] != parents_slug_path:
+		from django.http import Http404
+		raise Http404('No article matches the given query.')
 
 def index(request):
 	return render(
@@ -11,12 +40,16 @@ def index(request):
 		{'vertically_center_menu': True}
 	)
 
-def article(request, slug):
+def article(request, request_path):
+	slug_path = slugs_from_request_path(request_path)
+
+	validate_slug_path_or_404(slug_path)
+
 	return render(
 		request,
 		'article.html',
 		{
-			'article': get_object_or_404(Article, slug=slug),
+			'article': get_article_or_404(slug_path[-1]),
 		}
 	)
 
@@ -47,7 +80,6 @@ def contact(request, slug):
 		'contact.html',
 		{
 			'form': form,
-			'article': get_object_or_404(Article, slug=slug),
+			'article': get_article_or_404(slug),
 		}
 	)
-

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from django.db.models import (	Model, IntegerField, ForeignKey,
 								CharField, BooleanField, FileField,
 								ManyToManyField, TextField, URLField)
@@ -47,7 +49,7 @@ class Article(Model):
 							max_length=128)
 
 	slug = CharField(	null=False, blank=False, editable=True,
-						max_length=64)
+						max_length=64, unique=True)
 
 	parent = ForeignKey(	"self", null=True, blank=True, editable=True,
 							related_name='children')
@@ -67,7 +69,24 @@ class Article(Model):
 	hide = BooleanField(editable=True)
 
 	def visible_sub_articles(self):
+		"""
+		Returns al list of all sub articles (children) that not hidden.
+		"""
 		return self.children.filter(hide=False)
+
+	def parents(self):
+		"""
+		Returns a list of all parents (recursively).
+
+		ex. [1st_parent, 2nd_parent, …, root_parent]
+		"""
+
+		parents = []
+		article = self
+		while article.parent:
+			parents.append(article.parent)
+			article = article.parent
+		return parents
 
 	def __unicode__(self):
 		if self.hide:
