@@ -9,15 +9,15 @@
 
 <title>
 	{% block title_prefix %}{% endblock %}
-	Lukas Pirl
+	{% get_configuration_str 'name' %}
 	{% block title_postfix %}{% endblock %}
 </title>
 
 <meta name="robots" content="all">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta	name="description"
-		content="Lukas Pirl's Web site - {% get_configuration_str 'uvp' %}">
-<meta name="author" content="Lukas Pirl">
+		content="Web site of {% get_configuration_str 'name' %} - {% get_configuration_str 'slogan' %}">
+<meta name="author" content="{% get_configuration_str 'author' %}">
 
 <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
@@ -38,12 +38,12 @@
 			<a	id="logo_name"
 				href="{% url 'main.views.index' %}"
 				title="home">
-					Lukas Pirl
+					{% get_configuration_str 'name' %}
 			</a>
 			<a	id="logo_text"
 				href="{% url 'main.views.index' %}"
 				title="home">
-				{% get_configuration_str 'uvp' %}
+				{% get_configuration_str 'slogan' %}
 			</a>
 		</div>
 
