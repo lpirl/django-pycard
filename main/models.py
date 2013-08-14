@@ -78,7 +78,7 @@ class Article(Model):
 		"""
 		Returns a list of all parents (recursively).
 
-		ex. [1st_parent, 2nd_parent, …, root_parent]
+		ex. [root_parent, …, 2nd_parent, 1st_parent]
 		"""
 
 		parents = []
@@ -86,6 +86,7 @@ class Article(Model):
 		while article.parent:
 			parents.append(article.parent)
 			article = article.parent
+		parents.reverse()
 		return parents
 
 	def __unicode__(self):

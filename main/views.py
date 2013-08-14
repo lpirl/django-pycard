@@ -27,7 +27,6 @@ def validate_slug_path_or_404(slug_path):
 	"""
 	parents = get_article_or_404(slug_path[-1]).parents()
 	parents_slug_path = [a.slug for a in parents]
-	parents_slug_path.reverse()
 
 	if slug_path[:-1] != parents_slug_path:
 		from django.http import Http404
