@@ -5,7 +5,7 @@
 	{% for sub_article in sub_articles %}
 		<li>
 			<a	class="headline"
-				href="{% article_url sub_article %}">
+				href="{{ sub_article.get_absolute_url }}">
 				{{ sub_article.headline }}
 			</a>
 			<p class="teaser">

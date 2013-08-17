@@ -1,5 +1,3 @@
-from urlparse import urlsplit
-
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.conf import settings
@@ -12,25 +10,35 @@ def get_article_or_404(slug):
 	"""
 	return get_object_or_404(Article, slug=slug)
 
-def slugs_from_request_path(request_path):
+def get_slug_list_from_request_path(request_path):
 	"""
 	Extracts a list of slugs from the request path.
 	"""
-	return filter(
-		lambda s: bool(s),
-		urlsplit(request_path)[2].split("/")
-	)
+	slugs = request_path.split("/")
 
-def validate_slug_path_or_404(slug_path):
-	"""
-	Validates that request path equals parents slugs (recursively).
-	"""
-	parents = get_article_or_404(slug_path[-1]).parents()
-	parents_slug_path = [a.slug for a in parents]
+	# Remove empty string and end of list (trailing slash in url)
+	# both, with and without is valid, so we cannot rely on APPEND_SLASH
+	if not slugs[-1]:
+		slugs.pop()
 
-	if slug_path[:-1] != parents_slug_path:
-		from django.http import Http404
-		raise Http404('No article matches the given query.')
+	return slugs
+
+def get_article_from_slug_list(slug_list):
+	"""
+	Returns the corresponding article (last slug in slug list).
+
+	Additionally, this function validates the path to the article.
+	"""
+	try:
+		article = Article.objects.get(slug=slug_list[-1])
+	except DoesNotExist:
+		return None
+
+	# check if exactly all parents are present in slug list:
+	if slug_list[:-1] != [a.slug for a in article.parents()]:
+		return None
+
+	return article
 
 def index(request):
 	return render(
@@ -40,15 +48,19 @@ def index(request):
 	)
 
 def article(request, request_path):
-	slug_path = slugs_from_request_path(request_path)
+	slug_list = get_slug_list_from_request_path(request_path)
 
-	validate_slug_path_or_404(slug_path)
+	article = get_article_from_slug_list(slug_list)
+
+	if not article:
+		from django.http import Http404
+		raise Http404('No article matches the given query.')
 
 	return render(
 		request,
 		'article.html',
 		{
-			'article': get_article_or_404(slug_path[-1]),
+			'article': article,
 		}
 	)
 

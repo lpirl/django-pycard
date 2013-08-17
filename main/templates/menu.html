@@ -6,7 +6,7 @@
 
 <div id="menu">
 	{% for item in items %}
-		<a	href="{% article_url item.root_article %}"
+		<a	href="{{ item.root_article.get_absolute_url }}"
 			class="square"
 			style="top: {{item.pos_y}}em; left: {{item.pos_x}}em; height: {{item.height}}em; line-height: {{item.height}}em; width: {{item.width}}em;">
 				{{ item.root_article.headline }}

@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 from django.db.models import (	Model, IntegerField, ForeignKey,
 								CharField, BooleanField, FileField,
 								ManyToManyField, TextField, URLField)
@@ -89,6 +88,21 @@ class Article(Model):
 		parents.reverse()
 		return parents
 
+	def get_absolute_url(self):
+		"""
+		Returns url to an article including the parents in the path.
+
+		FIXME:	This is really not elegant. The must be a better way to deal
+				with an arbitrary number of URL parts in Django.
+		"""
+		from django.core.urlresolvers import reverse
+		url_without_path = reverse("main.views.article", args=[self.slug])
+
+		slug_path = self.parents() + [self]
+		url_with_path = "/".join([a.slug for a in slug_path])
+
+		return  url_without_path.replace(self.slug, url_with_path)
+
 	def __unicode__(self):
 		if self.hide:
 			return "(%s)" % unicode(self.headline)
@@ -97,7 +111,7 @@ class Article(Model):
 
 class Attachment(Model):
 	name = CharField(	null=False, blank=False, editable=True,
-								max_length=64)
+						max_length=64)
 	description = CharField(	null=False, blank=True, editable=True,
 								max_length=256)
 	data = FileField(	blank=False, editable=True,
