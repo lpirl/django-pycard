@@ -1,5 +1,5 @@
 from django.forms import (	Form, CharField, EmailField, BooleanField,
-							Textarea)
+							Textarea, ValidationError)
 
 class ContactForm(Form):
 
@@ -18,17 +18,18 @@ class ContactForm(Form):
 		This function is intended to prevent header injection.
 		"""
 
-		return 	self.cleaned_data[key_in_cleaned_data].replace(
-					"\n", ""
-				).replace(
-					"\r", ""
-				)
+		data = self.cleaned_data[key_in_cleaned_data]
+
+		if "\n" in data or "\r" in data:
+			raise ValidationError("Malicious data received.")
+
+		return 	data
 
 	def clean_name(self):
 		return self.cleaned_data_for_header("name")
 
 	def clean_subject(self):
-		return self.cleaned_data_for_header("name")
+		return self.cleaned_data_for_header("subject")
 
 	def get_subject(self, site_name):
 		from django.conf import settings
