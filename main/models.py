@@ -63,6 +63,9 @@ class Article(Model):
 	attachments = ManyToManyField(	"Attachment", blank=True,
 									editable=True)
 
+	content_media = ManyToManyField(	"ContentMedia", blank=True,
+										editable=True)
+
 	sub_articles_list_top = BooleanField(editable=True)
 	sub_articles_list_bottom = BooleanField(editable=True)
 	hide = BooleanField(editable=True)
@@ -119,3 +122,10 @@ class Attachment(Model):
 
 	def __unicode__(self):
 		return self.name
+
+class ContentMedia(Model):
+	data = FileField(	blank=False, editable=True,
+						upload_to="content_media", max_length=256)
+
+	def __unicode__(self):
+		return self.data.url.replace(self.data.field.upload_to, "")
