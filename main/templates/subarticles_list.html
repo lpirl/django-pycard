@@ -1,23 +1,23 @@
 {% if sub_articles.count %}
-	<ul>
-	{% for sub_article in sub_articles %}
-		<li>
-			<a	class="headline"
-				href="{{ sub_article.get_absolute_url }}">
-				{{ sub_article.headline }}
-			</a>
-			<p class="teaser">
-				{{ sub_article.teaser }}
-			</p>
-			{% if sub_article.url %}
-				<a	class="url"
-					href="{{ sub_article.url }}"
-					target="_blank"
-					title="external URL for {{ sub_article.headline }}">
-						{{ sub_article.url }}
-				</a>
-			{% endif %}
-		</li>
-	{% endfor %}
-	</ul>
+    <ul>
+    {% for sub_article in sub_articles %}
+        <li>
+            <a    class="headline"
+                href="{{ sub_article.get_absolute_url }}">
+                {{ sub_article.headline }}
+            </a>
+            <p class="teaser">
+                {{ sub_article.teaser }}
+            </p>
+            {% if sub_article.url %}
+                <a    class="url"
+                    href="{{ sub_article.url }}"
+                    target="_blank"
+                    title="external URL for {{ sub_article.headline }}">
+                        {{ sub_article.url }}
+                </a>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
 {% endif %}

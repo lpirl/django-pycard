@@ -1,37 +1,37 @@
 form > div {
-	display: block;
-	width: 90%;
-	margin-top: 1em;
+    display: block;
+    width: 90%;
+    margin-top: 1em;
 }
 
 input, textarea, label {
-	display:block;
-	width: 100%;
-	color: #000;
+    display:block;
+    width: 100%;
+    color: #000;
 }
 
 input, textarea, button {
-	border:1px solid #888;
-	background: none;
+    border:1px solid #888;
+    background: none;
 }
 
 label {
-	margin-bottom: -1.5em;
-	text-align: right;
-	color: #888;
-	padding-right: 0.5em;
+    margin-bottom: -1.5em;
+    text-align: right;
+    color: #888;
+    padding-right: 0.5em;
 }
 
 button {
-	margin: 0;
-	float: right;
-	box-shadow: #888 2px 2px 5px;
-	padding: 0.1em 1em;
+    margin: 0;
+    float: right;
+    box-shadow: #888 2px 2px 5px;
+    padding: 0.1em 1em;
 }
 
 form span.error {
-	color: red;
-	font-size: 0.8em;
-	margin-bottom: 0em;
-	margin-right: 1em;
+    color: red;
+    font-size: 0.8em;
+    margin-bottom: 0em;
+    margin-right: 1em;
 }

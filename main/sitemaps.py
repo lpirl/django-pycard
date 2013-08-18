@@ -2,11 +2,11 @@ from django.contrib.sitemaps import Sitemap
 from main.models import Article
 
 class ArticleSitemap(Sitemap):
-	changefreq = "monthly"
-	priority = 1
+    changefreq = "monthly"
+    priority = 1
 
-	def items(self):
-		return Article.objects.filter(hide=False)
+    def items(self):
+        return Article.objects.filter(hide=False)
 
-	def lastmod(self, obj):
-		return obj.date_modified
+    def lastmod(self, obj):
+        return obj.date_modified

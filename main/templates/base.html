@@ -8,50 +8,53 @@
 <head>
 
 <title>
-	{% block title_prefix %}{% endblock %}
-	{% get_configuration_str 'name' %}
-	{% block title_postfix %}{% endblock %}
+    {% block title_prefix %}{% endblock %}
+    {% get_configuration_str 'name' %}
+    {% block title_postfix %}{% endblock %}
 </title>
 
 <meta name="robots" content="all">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta	name="description"
-		content="Web site of {% get_configuration_str 'name' %} - {% get_configuration_str 'slogan' %}">
+<meta    name="description"
+        content="Web site of {% get_configuration_str 'name' %} - {% get_configuration_str 'slogan' %}">
 <meta name="author" content="{% get_configuration_str 'author' %}">
+
+<meta name=”robots” content="all,index">
+<meta name=”language” content="{% get_configuration_str 'language' %}">
 
 <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 <!--[if lt IE 7]>
-	<link rel="stylesheet" type="text/css"
-		href="{% static 'ie_adjustments.css' %}">
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'ie_adjustments.css' %}">
 <![endif]-->
 
 </head>
 
 <body>
 
-	{% squares %}
+    {% squares %}
 
-	<div id="root_container">
+    <div id="root_container">
 
-		<div id="logo">
-			<a	id="logo_name"
-				href="{% url 'main.views.index' %}"
-				title="home">
-					{% get_configuration_str 'name' %}
-			</a>
-			<a	id="logo_text"
-				href="{% url 'main.views.index' %}"
-				title="home">
-				{% get_configuration_str 'slogan' %}
-			</a>
-		</div>
+        <div id="logo">
+            <a    id="logo_name"
+                href="{% url 'main.views.index' %}"
+                title="home">
+                    {% get_configuration_str 'name' %}
+            </a>
+            <a    id="logo_text"
+                href="{% url 'main.views.index' %}"
+                title="home">
+                {% get_configuration_str 'slogan' %}
+            </a>
+        </div>
 
-		{% menu vertically_center_menu %}
-	
-		{% block content_container %}{% endblock %}
-		
-	</div>
+        {% menu vertically_center_menu %}
+    
+        {% block content_container %}{% endblock %}
+        
+    </div>
 </body>
 
 </html>

@@ -1,13 +1,15 @@
+{% load base_tags %}
+
 {% if vertically_center %}
-	<div id="menu_spacer_vertically_center"></div>
+    <div id="menu_spacer_vertically_center"></div>
 {% endif %}
 
 <div id="menu">
-	{% for item in items %}
-		<a	href="{{ item.root_article.get_absolute_url }}"
-			class="square"
-			style="top: {{item.pos_y}}em; left: {{item.pos_x}}em; height: {{item.height}}em; line-height: {{item.height}}em; width: {{item.width}}em;">
-				{{ item.root_article.headline }}
-		</a>
-	{% endfor %}
+    {% for item in items %}
+        <a    href="{{ item.root_article.get_absolute_url }}"
+            class="square"
+            style="top: {{item.pos_y}}em; left: {{item.pos_x}}em; height: {{item.height}}em; line-height: {{item.height}}em; width: {{item.width}}em;">
+                {{ item.root_article.headline }}
+        </a>
+    {% endfor %}
 </div>

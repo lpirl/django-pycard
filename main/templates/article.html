@@ -10,32 +10,32 @@
 {% block article_top %}{% endblock %}
 
 {% if article.sub_articles_list_top %}
-	<div class="sub_articles_list">
-		{% subarticles_list article.visible_sub_articles  %}
-	</div>
+    <div class="sub_articles_list">
+        {% subarticles_list article.visible_sub_articles  %}
+    </div>
 {% endif %}
 
 {% block article_pre_content %}{% endblock %}
 
 <div class="content">
-	{{article.content | restructuredtext }}
+    {{article.content | restructuredtext }}
 </div>
 
 {% block article_post_content %}{% endblock %}
 
 {% if article.sub_articles_list_bottom %}
-	<div class="sub_articles_list">
-		{% subarticles_list article.visible_sub_articles %}
-	</div>
+    <div class="sub_articles_list">
+        {% subarticles_list article.visible_sub_articles %}
+    </div>
 {% endif %}
 
 {% if article.attachments.count > 0 %}
-	<div class="attachements">
-		<p>Attachments:</p>
-		{% for attachment in article.attachments.all %}
-			{{ attachment }}
-		{% endfor %}
-	</div>
+    <div class="attachements">
+        <p>Attachments:</p>
+        {% for attachment in article.attachments.all %}
+            {{ attachment }}
+        {% endfor %}
+    </div>
 {% endif %}
 
 {% block article_bottom %}{% endblock %}
