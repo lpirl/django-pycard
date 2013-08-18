@@ -31,7 +31,7 @@ def get_article_from_slug_list(slug_list):
 	"""
 	try:
 		article = Article.objects.get(slug=slug_list[-1])
-	except DoesNotExist:
+	except Article.DoesNotExist:
 		return None
 
 	# check if exactly all parents are present in slug list:
