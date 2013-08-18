@@ -1,0 +1,34 @@
+div.system-message {
+	color: #f00;
+}
+
+.content > h1 {
+	font-size:2em;
+}
+
+a.toc-backref:link, a.internal:link {
+	color: #0969A2;
+}
+
+a.toc-backref:visited, a.internal:visited {
+	color: #0969A2;
+}
+
+div.contents {
+	float: right;
+	border: 1px solid #ccc;
+	margin: 0em 1.5em;
+	margin-bottom: 0.75em;
+	padding: 0em 1.5em;
+}
+
+div.contents p.topic-title {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: -0.5em;
+}
+
+div.contents ul {
+	list-style-type: none;
+	padding-left: 2em;
+}

@@ -19,16 +19,13 @@
         content="Web site of {% get_configuration_str 'name' %} - {% get_configuration_str 'slogan' %}">
 <meta name="author" content="{% get_configuration_str 'author' %}">
 
-<meta name=”robots” content="all,index">
-<meta name=”language” content="{% get_configuration_str 'language' %}">
-
 <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 <!--[if lt IE 7]>
     <link rel="stylesheet" type="text/css"
         href="{% static 'ie_adjustments.css' %}">
 <![endif]-->
-
+{% block header_extra %}{% endblock %}
 </head>
 
 <body>

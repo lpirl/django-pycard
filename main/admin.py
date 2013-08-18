@@ -12,6 +12,10 @@ class ArticleAdminForm(ModelForm):
         self.fields['teaser'].widget = admin.widgets.AdminTextareaWidget()
 
 class ArticleAdmin(ModelAdmin):
+    class Media:
+        css = {
+            "all": ("admin.css",)
+        }
     list_display = ('__unicode__', 'teaser', 'parent', 'date_modified')
     form = ArticleAdminForm
 
