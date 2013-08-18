@@ -16,10 +16,10 @@ input, textarea, button {
 }
 
 label {
-	margin-bottom: -1.2em;
+	margin-bottom: -1.5em;
 	text-align: right;
 	color: #888;
-	padding-right: 0.1em;
+	padding-right: 0.5em;
 }
 
 button {
