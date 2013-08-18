@@ -1,7 +1,8 @@
 # encoding: utf-8
 from django.db.models import (	Model, IntegerField, ForeignKey,
 								CharField, BooleanField, FileField,
-								ManyToManyField, TextField, URLField)
+								ManyToManyField, TextField, URLField,
+								DateTimeField)
 
 class Configuration(Model):
 	"""
@@ -43,6 +44,8 @@ class MenuItem(Model):
 
 	
 class Article(Model):
+
+	date_modified = DateTimeField(auto_now=True, editable=False)
 
 	headline = CharField(	null=False, blank=False, editable=True,
 							max_length=128)
