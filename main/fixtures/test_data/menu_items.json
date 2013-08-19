@@ -22,10 +22,10 @@
   }
 },
 {
-  "pk": 8, 
+  "pk": 9, 
   "model": "main.menuitem", 
   "fields": {
-    "root_article": 10, 
+    "root_article": 9, 
     "width": 1, 
     "pos_x": 1, 
     "pos_y": 1, 
@@ -72,7 +72,7 @@
   "pk": 9, 
   "model": "main.article", 
   "fields": {
-    "hide": false, 
+    "hide": true, 
     "sub_articles_list_top": true, 
     "parent": 7, 
     "date_modified": "2013-08-19T07:26:38.049Z", 

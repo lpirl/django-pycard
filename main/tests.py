@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.test import TestCase
-from main.models import Article, Configuration
+from main.models import Article, Configuration, MenuItem
 from main.forms import ContactForm
 
 class ContactFormTest(TestCase):
@@ -92,6 +92,7 @@ class ArticleUrlTest(TestCase):
 
     def test_valid_url(self):
         response = self.client.get(self.valid_url)
+        self.assertTrue(Article.objects.get(slug="level2_1").hide)
         self.assertContains(response, "Level 3 Article 1")
 
     def assert_404_for_modified_valid_url(self, search, replace):
@@ -151,9 +152,24 @@ class TagsTest(TestCase):
 
     def test_menu_items(self):
         """
-        Tests if all menu items are present through corresponding tag.
+        Tests if all menu items are [not] present through corresponding
+        tag.
         """
-        pass
+        items = MenuItem.objects.all()
+        self.assertTrue(
+            items.filter(root_article__hide=False).exists()
+        )
+        self.assertTrue(
+            items.filter(root_article__hide=True).exists()
+        )
+        for response in (self.response_index, self.response_not_index):
+            for item in items:
+                if item.root_article.hide:
+                    self.assertNotContains(response,
+                        item.root_article.headline)
+                else:
+                    self.assertContains(response,
+                        item.root_article.headline)
 
     def test_get_configuration_str(self):
         """
