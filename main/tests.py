@@ -33,7 +33,7 @@ class ContactFormTest(TestCase):
     def test_valid_data_email(self):
         from django.core import mail
         self.assertFalse(bool(mail.outbox))
-        response = self.client.post(self.url, self.valid_data)
+        self.client.post(self.url, self.valid_data)
         self.assertTrue(len(mail.outbox) == 1)
         message = str(mail.outbox[0].message())
         for key, value in self.valid_data.items():
@@ -167,6 +167,39 @@ class ArticleTemplateTest(TestCase):
                 int(top) + int(bottom)
             )
 
+    def test_article_attachments(self):
+        """
+        Tests if articles attachments are displayed
+        """
+        article_qs = Article.objects.exclude(attachments=None)
+        self.assertTrue(
+            article_qs.exists(),
+            "No article with attachments found."
+        )
+        article = article_qs[0]
+        response = self.client.get(article.get_absolute_url())
+        for attachment in article.attachments.all():
+            self.assertContains(
+                response,
+                attachment.name
+            )
+
+    def test_article_content(self):
+        """
+        Tests if articles attachments are displayed
+        """
+        article_qs = Article.objects.exclude(content="")
+        self.assertTrue(
+            article_qs.exists(),
+            "No article with content found."
+        )
+        article = article_qs[0]
+        response = self.client.get(article.get_absolute_url())
+        self.assertContains(
+            response,
+            article.content
+        )
+
 class TagsTest(TestCase):
     """
     Tests for the templatetags module
@@ -259,18 +292,18 @@ class TagsTest(TestCase):
         """
         Tests if sub articles are displayed
         """
-        suparticle_qs = Article.objects.exclude(hide=True).exclude(
+        subarticle_qs = Article.objects.exclude(hide=True).exclude(
             parent=None)
-        self.assertTrue(suparticle_qs.exists())
-        suparticle = suparticle_qs[0]
+        self.assertTrue(subarticle_qs.exists())
+        article = subarticle_qs[0].parents()[-1]
+        children = article.visible_sub_articles()
 
-        response = self.client.get(suparticle.get_absolute_url())
-        for subarticle in suparticle.children.all():
-            self.assertContains(
-                response,
-                subarticle.headline
-            )
-            self.assertContains(
-                response,
-                subarticle.teaser
-            )
+        self.assertTrue(children.exclude(url=None).exists())
+        self.assertTrue(children.exclude(teaser=None).exists())
+        self.assertTrue(children.exclude(headline=None).exists())
+
+        response = self.client.get(article.get_absolute_url())
+        for child in children:
+            self.assertContains(response, child.url)
+            self.assertContains(response, child.teaser)
+            self.assertContains(response, child.headline)
