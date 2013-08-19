@@ -1,0 +1,38 @@
+[
+{
+  "pk": 3, 
+  "model": "main.article", 
+  "fields": {
+    "date_modified": "2013-08-18T13:46:47.154Z",
+    "hide": false, 
+    "sub_articles_list_top": false, 
+    "parent": null, 
+    "headline": "contact", 
+    "attachments": [], 
+    "content": "", 
+    "url": "", 
+    "teaser": "", 
+    "content_media": [], 
+    "slug": "contact", 
+    "sub_articles_list_bottom": false
+  }
+},
+{
+  "pk": 6, 
+  "model": "main.article", 
+  "fields": {
+    "date_modified": "2013-08-18T13:46:47.154Z",
+    "hide": true, 
+    "sub_articles_list_top": false, 
+    "parent": 3, 
+    "headline": "message sent", 
+    "attachments": [], 
+    "content": "Thanks for your message!", 
+    "url": "", 
+    "teaser": "", 
+    "content_media": [], 
+    "slug": "message_sent", 
+    "sub_articles_list_bottom": false
+  }
+}
+]
