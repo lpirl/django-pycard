@@ -4,7 +4,7 @@ from django.test import TestCase
 from main.forms import ContactForm
 
 class ContactFormTest(TestCase):
-    fixtures = ("contact.json", )
+    fixtures = ["contact.json"]
     
     def setUp(self):
         self.article = Article.objects.get(slug="contact")
@@ -16,7 +16,7 @@ class ContactFormTest(TestCase):
             'message': "Dear Sir,\ncould you send me some cookies?\nJohn"
         }
 
-    def test_valid_data(self):
+    def test_valid_data_redirection(self):
         response = self.client.post(
             self.url,
             self.valid_data,
@@ -26,6 +26,19 @@ class ContactFormTest(TestCase):
             slug="message_sent"
         ).get_absolute_url()
         self.assertRedirects(response, target_url)
+
+    def test_valid_data_email(self):
+        from django.core import mail
+        self.assertFalse(bool(mail.outbox))
+        response = self.client.post(self.url, self.valid_data)
+        self.assertTrue(len(mail.outbox) == 1)
+        message = str(mail.outbox[0].message())
+        for key, value in self.valid_data.items():
+            for value_line in value.splitlines():
+                self.assertTrue(
+                    value_line in message,
+                    "%s missing in email" % key
+                )
 
     def test_injection(self):
         for field in ['name', 'subject']:
@@ -68,5 +81,5 @@ class ContactFormTest(TestCase):
             for value in variant.values():
                 self.assertTrue(value in sender)
 
-            if not ''.join(values):
+            if not ''.join(variant.values()):
                 self.assertTrue("unknown" in sender)
