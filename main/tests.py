@@ -1,10 +1,10 @@
-from main.models import Article
 from django.conf import settings
 from django.test import TestCase
+from main.models import Article, Configuration
 from main.forms import ContactForm
 
 class ContactFormTest(TestCase):
-    fixtures = ["contact.json"]
+    fixtures = ["test_data/contact.json"]
     
     def setUp(self):
         self.article = Article.objects.get(slug="contact")
@@ -85,7 +85,7 @@ class ContactFormTest(TestCase):
                 self.assertTrue("unknown" in sender)
 
 class ArticleUrlTest(TestCase):
-    fixtures = ["article.json"]
+    fixtures = ["test_data/article.json"]
     
     def setUp(self):
         self.valid_url = "/level1_1/level2_1/level3_1/?query=foo#section"
@@ -111,3 +111,61 @@ class ArticleUrlTest(TestCase):
 
     def test_wrong_parent(self):
         self.assert_404_for_modified_valid_url("level2_1", "level2_2")
+
+class TagsTest(TestCase):
+    fixtures = ["test_data/article.json", "test_data/configuration.json",
+                "test_data/menu_items.json"]
+    
+    def setUp(self):
+        self.response_index = self.client.get("/")
+        self.response_not_index = self.client.get(
+            Article.objects.all().order_by("?")[0].get_absolute_url()
+        )
+
+    def test_squares(self):
+        """
+        Tests if there are enough squares :)
+        """
+        count = Configuration.get_int("squares_count")
+        for response in (self.response_index, self.response_not_index):
+            self.assertContains(
+                response,
+                '<div class="square background_square"',
+                count=count
+            )
+
+    def test_menu_spacer(self):
+        """
+        Tests if menu spacer is [not] present on [not] /
+        """
+        spacer_div = '<div id="menu_spacer_vertically_center"></div>'
+        self.assertContains(
+            self.response_index,
+            spacer_div,
+            count=1
+        )
+        self.assertNotContains(
+            self.response_not_index,
+            spacer_div,
+        )
+
+    def test_menu_items(self):
+        """
+        Tests if all menu items are present through corresponding tag.
+        """
+        pass
+
+    def test_get_configuration_str(self):
+        """
+        Tests if string configurations are present through
+        corresponding tag.
+        """
+        configuration_strings = (
+            Configuration.objects.get(key="author").value,
+            Configuration.objects.get(key="slogan").value
+        )
+        for string in configuration_strings:
+            self.assertContains(
+                self.response_index,
+                string
+            )

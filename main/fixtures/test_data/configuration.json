@@ -1,0 +1,75 @@
+[
+{
+  "pk": "author", 
+  "model": "main.configuration", 
+  "fields": {
+    "comment": "", 
+    "value": "Lukas Pirl"
+  }
+},
+{
+  "pk": "language", 
+  "model": "main.configuration", 
+  "fields": {
+    "comment": "ISO 639-1 code", 
+    "value": "en"
+  }
+},
+
+{
+  "pk": "name", 
+  "model": "main.configuration", 
+  "fields": {
+    "comment": "", 
+    "value": "Lukas Pirl"
+  }
+},
+{
+  "pk": "slogan", 
+  "model": "main.configuration", 
+  "fields": {
+    "comment": "", 
+    "value": "IT systems engineer"
+  }
+},
+{
+  "pk": "squares_count", 
+  "model": "main.configuration", 
+  "fields": {
+    "comment": "number of squares in the background", 
+    "value": "50"
+  }
+},
+{
+  "pk": "squares_height_max", 
+  "model": "main.configuration", 
+  "fields": {
+    "comment": "maximum height of the squares in the background in percent of view port", 
+    "value": "10"
+  }
+},
+{
+  "pk": "squares_height_min", 
+  "model": "main.configuration", 
+  "fields": {
+    "comment": "minimum height of the squares in the background in percent of view port", 
+    "value": "1"
+  }
+},
+{
+  "pk": "squares_width_max", 
+  "model": "main.configuration", 
+  "fields": {
+    "comment": "maximum width of the squares in the background in percent of view port", 
+    "value": "10"
+  }
+},
+{
+  "pk": "squares_width_min", 
+  "model": "main.configuration", 
+  "fields": {
+    "comment": "minimum width of the squares in the background in percent of view port", 
+    "value": "1"
+  }
+}
+]
