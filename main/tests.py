@@ -83,3 +83,31 @@ class ContactFormTest(TestCase):
 
             if not ''.join(variant.values()):
                 self.assertTrue("unknown" in sender)
+
+class ArticleUrlTest(TestCase):
+    fixtures = ["article.json"]
+    
+    def setUp(self):
+        self.valid_url = "/level1_1/level2_1/level3_1/?query=foo#section"
+
+    def test_valid_url(self):
+        response = self.client.get(self.valid_url)
+        self.assertContains(response, "Level 3 Article 1")
+
+    def assert_404_for_modified_valid_url(self, search, replace):
+        url = self.valid_url.replace(search, replace)
+        response = self.client.get(url)
+        self.assertEqual(
+            response.status_code, 404,
+            "'%s' returned not %d! (%d instead)" % (
+                url, 404, response.status_code)
+        )
+
+    def test_missing_parent(self):
+        self.assert_404_for_modified_valid_url("/level2_1", "")
+
+    def test_no_parents(self):
+        self.assert_404_for_modified_valid_url("/level1_1/level2_1", "")
+
+    def test_wrong_parent(self):
+        self.assert_404_for_modified_valid_url("level2_1", "level2_2")
