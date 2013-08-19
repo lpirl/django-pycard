@@ -52,7 +52,7 @@ def article(request, request_path):
 
     requested_article = get_article_from_slug_list(slug_list)
 
-    if not article:
+    if not requested_article:
         from django.http import Http404
         raise Http404('No article matches the given query.')
 
