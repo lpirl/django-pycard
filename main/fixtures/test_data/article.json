@@ -92,6 +92,24 @@
   }
 },
 {
+  "pk": 12, 
+  "model": "main.article", 
+  "fields": {
+    "hide": false, 
+    "sub_articles_list_top": false, 
+    "parent": 9, 
+    "date_modified": "2013-08-19T07:30:45.284Z", 
+    "headline": "Another Article", 
+    "attachments": [], 
+    "content": "intentionally left blank", 
+    "url": "", 
+    "teaser": "Bottom only sub article list", 
+    "content_media": [], 
+    "slug": "bottom_only", 
+    "sub_articles_list_bottom": true
+  }
+},
+{
   "pk": 1, 
   "model": "main.attachment", 
   "fields": {

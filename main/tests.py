@@ -143,6 +143,30 @@ class ArticleTemplateTest(TestCase):
     """
     fixtures = ["test_data/article.json"]
 
+    def test_subarticle_list_count(self):
+        """
+        Tests if sub articles lists are displayed accordingly
+        """
+        from itertools import product
+        sub_articles_list_div = '<div class="sub_articles_list">'
+        for top, bottom in product((True, False), repeat=2):
+            article_qs = Article.objects.filter(
+                    sub_articles_list_top=top
+                ).filter(
+                    sub_articles_list_bottom=bottom
+                )
+            self.assertTrue(
+                article_qs.exists(),
+                "No article with sub_article_list_top=%r and sub_article_list_bottom=%r found." % (top, bottom)
+            )
+            article = article_qs[0]
+            response = self.client.get(article.get_absolute_url())
+            self.assertContains(
+                response,
+                sub_articles_list_div,
+                int(top) + int(bottom)
+            )
+
 class TagsTest(TestCase):
     """
     Tests for the templatetags module
@@ -235,8 +259,10 @@ class TagsTest(TestCase):
         """
         Tests if sub articles are displayed
         """
-        suparticle = Article.objects.exclude(hide=True).exclude(
-            parent=None)[0]
+        suparticle_qs = Article.objects.exclude(hide=True).exclude(
+            parent=None)
+        self.assertTrue(suparticle_qs.exists())
+        suparticle = suparticle_qs[0]
 
         response = self.client.get(suparticle.get_absolute_url())
         for subarticle in suparticle.children.all():
