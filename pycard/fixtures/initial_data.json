@@ -1,0 +1,50 @@
+[
+{
+  "pk": "language", 
+  "model": "pycard.configuration", 
+  "fields": {
+    "comment": "ISO 639-1 code", 
+    "value": "en"
+  }
+},
+{
+  "pk": "squares_count", 
+  "model": "pycard.configuration", 
+  "fields": {
+    "comment": "number of squares in the background", 
+    "value": "50"
+  }
+},
+{
+  "pk": "squares_height_max", 
+  "model": "pycard.configuration", 
+  "fields": {
+    "comment": "maximum height of the squares in the background in percent of view port", 
+    "value": "10"
+  }
+},
+{
+  "pk": "squares_height_min", 
+  "model": "pycard.configuration", 
+  "fields": {
+    "comment": "minimum height of the squares in the background in percent of view port", 
+    "value": "1"
+  }
+},
+{
+  "pk": "squares_width_max", 
+  "model": "pycard.configuration", 
+  "fields": {
+    "comment": "maximum width of the squares in the background in percent of view port", 
+    "value": "10"
+  }
+},
+{
+  "pk": "squares_width_min", 
+  "model": "pycard.configuration", 
+  "fields": {
+    "comment": "minimum width of the squares in the background in percent of view port", 
+    "value": "1"
+  }
+}
+]
