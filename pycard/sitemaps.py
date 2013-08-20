@@ -1,5 +1,5 @@
 from django.contrib.sitemaps import Sitemap
-from main.models import Article
+from pycard.models import Article
 
 class ArticleSitemap(Sitemap):
     changefreq = "monthly"

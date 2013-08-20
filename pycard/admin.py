@@ -1,6 +1,6 @@
 from django.contrib.admin import site, ModelAdmin
 from django.forms import ModelForm
-from main.models import (MenuItem, Article, Attachment, Configuration,
+from pycard.models import (MenuItem, Article, Attachment, Configuration,
                          ContentMedia)
 
 from django.contrib import admin

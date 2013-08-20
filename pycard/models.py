@@ -103,7 +103,7 @@ class Article(Model):
                 with an arbitrary number of URL parts in Django.
         """
         from django.core.urlresolvers import reverse
-        url_without_path = reverse("main.views.article", args=[self.slug])
+        url_without_path = reverse("pycard.views.article", args=[self.slug])
 
         slug_path = self.parents() + [self]
         url_with_path = "/".join([a.slug for a in slug_path])

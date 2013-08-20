@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.test import TestCase
-from main.models import Article, Configuration, MenuItem
-from main.forms import ContactForm
+from pycard.models import Article, Configuration, MenuItem
+from pycard.forms import ContactForm
 
 class ContactFormTest(TestCase):
     """

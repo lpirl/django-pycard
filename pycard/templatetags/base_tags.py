@@ -2,7 +2,7 @@ from random import randint
 
 from django import template
 
-from main.models import Configuration, MenuItem
+from pycard.models import Configuration, MenuItem
 
 register = template.Library()
 

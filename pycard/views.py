@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.conf import settings
 
-from main.models import Article
+from pycard.models import Article
 
 def get_article_or_404(slug):
     """
@@ -65,7 +65,7 @@ def article(request, request_path):
     )
 
 def contact(request, slug):
-    from main.forms import ContactForm
+    from pycard.forms import ContactForm
 
     form = ContactForm(data=request.POST or None)
 

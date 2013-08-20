@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from main.sitemaps import ArticleSitemap
+from pycard.sitemaps import ArticleSitemap
 
 urlpatterns = patterns('',
     (    r'^sitemap\.xml$',
@@ -11,7 +11,7 @@ urlpatterns = patterns('',
             }
         }
     ),
-    url(r'^$', 'main.views.index'),
-    url(r'^(contact)/$', 'main.views.contact'),
-    url(r'^(.+)/$', 'main.views.article'),
+    url(r'^$', 'pycard.views.index'),
+    url(r'^(contact)/$', 'pycard.views.contact'),
+    url(r'^(.+)/$', 'pycard.views.article'),
 )

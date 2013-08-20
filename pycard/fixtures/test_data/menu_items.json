@@ -1,7 +1,7 @@
 [
 {
   "pk": 6, 
-  "model": "main.menuitem", 
+  "model": "pycard.menuitem", 
   "fields": {
     "root_article": 7, 
     "width": 1, 
@@ -12,7 +12,7 @@
 },
 {
   "pk": 7, 
-  "model": "main.menuitem", 
+  "model": "pycard.menuitem", 
   "fields": {
     "root_article": 8, 
     "width": 1, 
@@ -23,7 +23,7 @@
 },
 {
   "pk": 9, 
-  "model": "main.menuitem", 
+  "model": "pycard.menuitem", 
   "fields": {
     "root_article": 9, 
     "width": 1, 
@@ -34,7 +34,7 @@
 },
 {
   "pk": 7, 
-  "model": "main.article", 
+  "model": "pycard.article", 
   "fields": {
     "hide": false, 
     "sub_articles_list_top": true, 
@@ -52,7 +52,7 @@
 },
 {
   "pk": 8, 
-  "model": "main.article", 
+  "model": "pycard.article", 
   "fields": {
     "hide": false, 
     "sub_articles_list_top": true, 
@@ -70,7 +70,7 @@
 },
 {
   "pk": 9, 
-  "model": "main.article", 
+  "model": "pycard.article", 
   "fields": {
     "hide": true, 
     "sub_articles_list_top": true, 
@@ -90,7 +90,7 @@
 },
 {
   "pk": 10, 
-  "model": "main.article", 
+  "model": "pycard.article", 
   "fields": {
     "hide": false, 
     "sub_articles_list_top": true, 
@@ -108,7 +108,7 @@
 },
 {
   "pk": 1, 
-  "model": "main.attachment", 
+  "model": "pycard.attachment", 
   "fields": {
     "data": "attachments/assembled.JPG", 
     "name": "test", 
