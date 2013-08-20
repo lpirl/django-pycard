@@ -1,6 +1,5 @@
 from django.contrib.admin import site, ModelAdmin
 from django.forms import ModelForm
-from django.forms.widgets import Textarea
 from main.models import (MenuItem, Article, Attachment, Configuration,
                          ContentMedia)
 
