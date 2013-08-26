@@ -43,6 +43,7 @@ div#menu_spacer_vertically_center {
 
 div#menu > a {
     position: absolute;
+    padding: 0.25em;
     text-align: center;
     color: #0969A2;
     background-color: rgba(0, 0, 0, 0.01);
