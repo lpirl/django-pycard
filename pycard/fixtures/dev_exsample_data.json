@@ -4,7 +4,23 @@
   "model": "pycard.configuration", 
   "fields": {
     "comment": "", 
-    "value": "Lukas Pirl"
+    "value": "John Regular"
+  }
+},
+{
+  "pk": "name", 
+  "model": "pycard.configuration", 
+  "fields": {
+    "comment": "", 
+    "value": "John Regular"
+  }
+},
+{
+  "pk": "slogan", 
+  "model": "pycard.configuration", 
+  "fields": {
+    "comment": "", 
+    "value": "even more average than average"
   }
 },
 {
@@ -13,8 +29,8 @@
   "fields": {
     "root_article": 2, 
     "width": 7, 
-    "pos_x": 37, 
-    "pos_y": 3, 
+    "pos_x": 45, 
+    "pos_y": 1, 
     "height": 4
   }
 },
