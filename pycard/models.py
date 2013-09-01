@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.db.models import (  Model, IntegerField, ForeignKey,
                                 CharField, BooleanField, FileField,
                                 ManyToManyField, TextField, URLField,
-                                DateTimeField)
+                                DateTimeField, DateField)
 
 class Configuration(Model):
     """
@@ -46,33 +46,54 @@ class MenuItem(Model):
     
 class Article(Model):
 
+    # used for modification date in sitemap
     date_modified = DateTimeField(auto_now=True, editable=False)
 
-    headline = CharField(    null=False, blank=False, editable=True,
-                            max_length=128)
+    headline = CharField(null=False, blank=False, editable=True,
+        max_length=128)
 
-    slug = CharField(    null=False, blank=False, editable=True,
-                        max_length=64, unique=True)
+    slug = CharField(null=False, blank=False, editable=True,
+        max_length=64, unique=True, help_text="Used in URL.")
 
-    parent = ForeignKey(    "self", null=True, blank=True, editable=True,
-                            related_name='children')
-
-    teaser = CharField(    null=False, blank=True, editable=True,
-                        max_length=256)
+    teaser = CharField(null=False, blank=True, editable=True,
+                       max_length=256)
 
     content = TextField(null=False, blank=True, editable=True)
 
-    url = URLField(    null=False, blank=True, editable=True)
+    url = URLField(null=False, blank=True, editable=True)
 
-    attachments = ManyToManyField(    "Attachment", blank=True,
-                                    editable=True)
+    attachments = ManyToManyField("Attachment", blank=True,
+        editable=True)
 
-    content_media = ManyToManyField(    "ContentMedia", blank=True,
-                                        editable=True)
+    content_media = ManyToManyField("ContentMedia", blank=True,
+        editable=True, help_text="Resources referenced in content " +
+        "(ex: images).")
+
+    parent = ForeignKey("self", null=True, blank=True, editable=True,
+        related_name='children', help_text="Article listed there.")
+
+    sort_priority = IntegerField(null=True, blank=True, editable=True,
+        default=lambda: Article.max_sort_priority()+10,
+        help_text="Position in sub article list (highest = top).")
 
     sub_articles_list_top = BooleanField(editable=True)
     sub_articles_list_bottom = BooleanField(editable=True)
-    hide = BooleanField(editable=True)
+    hide = BooleanField(editable=True, help_text="Hides article in " +
+        "lists but it will be still accessible.")
+
+    class Meta:
+        ordering = ['-sort_priority']
+
+    @classmethod
+    def max_sort_priority(cls):
+        """
+        Returns the highest value set as sort_priority.
+        """
+        cls.objects.all().order_by(
+            "-sort_priority"
+        ).values_list(
+            "sort_priority", flat=True
+        )[0]
 
     def visible_sub_articles(self):
         """

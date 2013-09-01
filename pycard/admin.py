@@ -15,8 +15,10 @@ class ArticleAdmin(ModelAdmin):
         css = {
             "all": ("admin.css",)
         }
-    list_display = ('__unicode__', 'teaser', 'parent', 'date_modified')
+    list_display = ('__unicode__', 'teaser', 'parent', 'sort_priority',
+                    'date_modified')
     form = ArticleAdminForm
+    ordering = ['-date_modified']
 
 site.register(MenuItem, ModelAdmin)
 site.register(Article, ArticleAdmin)

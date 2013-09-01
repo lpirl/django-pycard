@@ -72,6 +72,7 @@
   "model": "pycard.article", 
   "fields": {
     "date_modified": "2013-08-18T13:46:47.154Z",
+    "sort_priority": "0",
     "hide": false, 
     "sub_articles_list_top": true, 
     "parent": 2, 
@@ -89,9 +90,10 @@
 },
 {
   "pk": 2, 
-  "model": "pycard.article", 
+  "model": "pycard.article",
   "fields": {
     "date_modified": "2013-08-18T13:46:47.154Z",
+    "sort_priority": "10",
     "hide": false, 
     "sub_articles_list_top": true,
     "parent": null, 
@@ -110,6 +112,7 @@
   "model": "pycard.article", 
   "fields": {
     "date_modified": "2013-08-18T13:46:47.154Z",
+    "sort_priority": "20",
     "hide": false, 
     "sub_articles_list_top": false, 
     "parent": null, 
@@ -128,6 +131,7 @@
   "model": "pycard.article", 
   "fields": {
     "date_modified": "2013-08-18T13:46:47.154Z",
+    "sort_priority": "30",
     "hide": false, 
     "sub_articles_list_top": true, 
     "parent": 2, 
@@ -146,6 +150,7 @@
   "model": "pycard.article", 
   "fields": {
     "date_modified": "2013-08-18T13:46:47.154Z",
+    "sort_priority": "40",
     "hide": false, 
     "sub_articles_list_top": false, 
     "parent": null, 
@@ -164,6 +169,7 @@
   "model": "pycard.article", 
   "fields": {
     "date_modified": "2013-08-18T13:46:47.154Z",
+    "sort_priority": "50",
     "hide": true, 
     "sub_articles_list_top": false, 
     "parent": 3, 
