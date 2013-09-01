@@ -167,6 +167,38 @@ class ArticleTemplateTest(TestCase):
                 int(top) + int(bottom)
             )
 
+    def test_subarticle_list_order(self):
+        """
+        Tests if sub articles lists are ordered correctly
+        """
+        parent = Article.objects.get(headline="Level 2 Article 1")
+        children = parent.visible_sub_articles().order_by('-sort_priority')
+
+        self.assertTrue(len(children)>1)
+
+        self.assertNotEqual(    children[0].sort_priority,
+                                children[1].sort_priority)
+
+        # for readability (already implied)
+        self.assertTrue(
+            children[0].sort_priority
+            >
+            children[1].sort_priority
+        )
+
+        response_content = self.client.get(
+            parent.get_absolute_url()
+        ).content
+
+        position_top = response_content.find(children[0].headline)
+        position_bottom = response_content.find(children[1].headline)
+
+        # make sure headlines were found
+        self.assertNotEqual(position_top, -1)
+        self.assertNotEqual(position_bottom, -1)
+
+        self.assertTrue(position_top < position_bottom)
+
     def test_article_attachments(self):
         """
         Tests if articles attachments are displayed
@@ -188,13 +220,10 @@ class ArticleTemplateTest(TestCase):
         """
         Tests if articles attachments are displayed
         """
-        article_qs = Article.objects.exclude(content="")
-        self.assertTrue(
-            article_qs.exists(),
-            "No article with content found."
-        )
-        article = article_qs[0]
+        article = Article.objects.get(pk=12)
+        self.assertNotEqual(article.content, "")
         response = self.client.get(article.get_absolute_url())
+
         self.assertContains(
             response,
             article.content
