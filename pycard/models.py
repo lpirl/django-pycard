@@ -43,7 +43,6 @@ class MenuItem(Model):
     def __unicode__(self):
         return unicode(self.root_article)
 
-    
 class Article(Model):
 
     # used for modification date in sitemap
@@ -101,7 +100,7 @@ class Article(Model):
         """
         return self.children.filter(hide=False)
 
-    def parents(self):
+    def parents(self, include_self=False):
         """
         Returns a list of all parents (recursively).
 
@@ -109,6 +108,8 @@ class Article(Model):
         """
 
         parents = []
+        if include_self:
+            parents.append(self)
         article = self
         while article.parent:
             parents.append(article.parent)

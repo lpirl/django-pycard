@@ -41,6 +41,16 @@ div#menu_spacer_vertically_center {
     height: 10em;
 }
 
+div#breadcrumbs {
+    position: absolute;
+    bottom: 0px;
+    color: #ccc
+}
+
+div#breadcrumbs > a {
+    color: inherit;
+}
+
 div#menu > a {
     position: absolute;
     padding: 0.25em;

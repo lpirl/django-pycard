@@ -37,8 +37,7 @@ def menu(article=None):
     items = MenuItem.objects.filter(root_article__hide=False)
 
     if bool(article):
-        parents = article.parents()
-        parents.append(article)
+        parents = article.parents(True)
 
         # mark the menu item that is closest to the selected article:
         parents.reverse()
@@ -53,9 +52,22 @@ def menu(article=None):
 
     return {
         'vertically_center': not bool(article),
+        'article': article or None,
         'items': items
     }
 register.inclusion_tag('menu.html')(menu)
+
+def breadcrumbs(to_article=None):
+
+    if to_article:
+        crumbs = to_article.parents(True)
+    else:
+        crumbs = None
+
+    return {
+        'crumbs': crumbs
+    }
+register.inclusion_tag('breadcrumbs.html')(breadcrumbs)
 
 def subarticles_list(sub_articles):
     return {

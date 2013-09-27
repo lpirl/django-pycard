@@ -1,0 +1,9 @@
+<div id="breadcrumbs">
+    {% if crumbs %}
+        {% for crumb in crumbs %}
+            > <a href="{{ crumb.get_absolute_url }}">
+                {{crumb.headline|truncatechars:16}}
+            </a>
+        {% endfor %}
+    {% endif %}
+</div>
