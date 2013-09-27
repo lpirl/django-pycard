@@ -41,11 +41,7 @@ def get_article_from_slug_list(slug_list):
     return requested_article
 
 def index(request):
-    return render(
-        request,
-        'index.html',
-        {'vertically_center_menu': True}
-    )
+    return render(request, 'index.html')
 
 def article(request, request_path):
     slug_list = get_slug_list_from_request_path(request_path)

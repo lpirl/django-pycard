@@ -33,10 +33,27 @@ def squares():
     }
 register.inclusion_tag('squares.html')(squares)
 
-def menu(vertically_center=False):
+def menu(article=None):
+    items = MenuItem.objects.filter(root_article__hide=False)
+
+    if bool(article):
+        parents = article.parents()
+        parents.append(article)
+
+        # mark the menu item that is closest to the selected article:
+        parents.reverse()
+        for parent in parents:
+            if parent in parents:
+                items = items.extra(
+                    select={
+                        'active': "root_article_id = '%s'" % parent.id
+                    }
+                )
+                break
+
     return {
-        'vertically_center': vertically_center,
-        'items': MenuItem.objects.filter(root_article__hide=False)
+        'vertically_center': not bool(article),
+        'items': items
     }
 register.inclusion_tag('menu.html')(menu)
 
