@@ -41,8 +41,9 @@ def menu(article=None):
 
         # mark the menu item that is closest to the selected article:
         parents.reverse()
+        root_articles = [i.root_article for i in items]
         for parent in parents:
-            if parent in parents:
+            if parent in root_articles:
                 items = items.extra(
                     select={
                         'active': "root_article_id = '%s'" % parent.id
