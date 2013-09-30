@@ -2,6 +2,7 @@ from django.conf import settings
 from django.test import TestCase
 from pycard.models import Article, Configuration, MenuItem
 from pycard.forms import ContactForm
+from pycard.templatetags.base_tags import menu as menu_context
 
 class ContactFormTest(TestCase):
     """
@@ -269,7 +270,7 @@ class TagsTest(TestCase):
             spacer_div,
         )
 
-    def test_menu_items(self):
+    def test_menu_items_existence(self):
         """
         Tests if all menu items are [not] present through corresponding
         tag.
@@ -289,6 +290,42 @@ class TagsTest(TestCase):
                 else:
                     self.assertContains(response,
                         item.root_article.headline)
+
+    def test_menu_items_active_state(self):
+        """
+        Tests if the menu items that is closest to the current article
+        (through the parent relation of articles) is marked as active.
+        This is not done via the rendered HTML since it seems to be much
+        more complicated and not ultimately beneficial.
+        """
+        menu_items = MenuItem.objects.filter(root_article__hide=False)
+        self.assertTrue(menu_items.exists())
+        menu_items_filter = menu_items.filter
+
+        articles = Article.objects.all().filter(hide=False)
+        self.assertTrue(articles.exists())
+
+        for article in articles:
+            parents = article.parents(True)
+
+            # find menu item that points to the closest parent:
+            closest_item_in_menu = None
+            for parent in parents:
+                candidate = menu_items_filter(root_article_id=parent)
+                if candidate.exists():
+                    closest_item_in_menu = candidate[0]
+
+            if closest_item_in_menu:
+                for item in menu_context(article)['items']:
+                    self.assertEqual(
+                        item.active,
+                        int(item == closest_item_in_menu),
+                        "For article %s, the attribute 'active' of menu item '%s' should be %u!" % (
+                            str(article),
+                            str(item),
+                            int(item.root_article == closest_item_in_menu)
+                        )
+                    )
 
     def test_get_configuration_str(self):
         """
