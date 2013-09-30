@@ -51,6 +51,10 @@ div#breadcrumbs > a {
     color: inherit;
 }
 
+div#breadcrumbs > a:hover {
+    text-decoration: none;
+}
+
 div#menu > a {
     position: absolute;
     padding: 0.25em;
