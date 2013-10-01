@@ -16,8 +16,10 @@ class TagsTest(TestCase):
     
     def setUp(self):
         self.response_index = self.client.get("/")
+        self.response_not_index_article = Article.objects.all(
+            ).order_by("?")[0]
         self.response_not_index = self.client.get(
-            Article.objects.all().order_by("?")[0].get_absolute_url()
+            self.response_not_index_article.get_absolute_url()
         )
 
     def test_squares(self):
@@ -68,6 +70,25 @@ class TagsTest(TestCase):
                     self.assertContains(response,
                         item.root_article.headline)
 
+
+    def test_menu_items_css_class(self):
+        """
+        Tests if all menu items are [not] present through corresponding
+        tag.
+        """
+        menu_item = MenuItem.objects.filter(root_article__hide=False)[0]
+        request_url = menu_item.root_article.get_absolute_url()
+        response = self.client.get(request_url)
+
+        import re
+        response.content = re.sub('\s+', ' ', response.content)
+
+        self.assertContains(
+            response,
+            'href="%s" class="square active"' % request_url,
+            count=1
+        )
+        
     def test_menu_items_active_state(self):
         """
         Tests if the menu items that is closest to the current article
