@@ -16,10 +16,24 @@ class TagsTest(TestCase):
     
     def setUp(self):
         self.response_index = self.client.get("/")
-        self.response_not_index_article = Article.objects.all(
-            ).order_by("?")[0]
-        self.response_not_index = self.client.get(
-            self.response_not_index_article.get_absolute_url()
+
+        self.response_visible_article = Article.objects.all(
+            ).filter(hide=False).order_by("?")[0]
+        self.response_visible = self.client.get(
+            self.response_visible_article.get_absolute_url()
+        )
+
+        self.response_hidden_article = Article.objects.all(
+            ).filter(hide=True).order_by("?")[0]
+        self.response_hidden = self.client.get(
+            self.response_hidden_article.get_absolute_url()
+        )
+
+        # shortcut:
+        self.responses = (
+            self.response_index,
+            self.response_visible,
+            self.response_hidden,
         )
 
     def test_squares(self):
@@ -27,7 +41,7 @@ class TagsTest(TestCase):
         Tests if there are enough squares :)
         """
         count = Configuration.get_int("squares_count")
-        for response in (self.response_index, self.response_not_index):
+        for response in self.responses:
             self.assertContains(
                 response,
                 '<div class="square background_square"',
@@ -45,7 +59,7 @@ class TagsTest(TestCase):
             count=1
         )
         self.assertNotContains(
-            self.response_not_index,
+            self.response_visible,
             spacer_div,
         )
 
@@ -61,7 +75,7 @@ class TagsTest(TestCase):
         self.assertTrue(
             items.filter(root_article__hide=True).exists()
         )
-        for response in (self.response_index, self.response_not_index):
+        for response in (self.response_index, self.response_visible):
             for item in items:
                 if item.root_article.hide:
                     self.assertNotContains(response,
@@ -133,14 +147,14 @@ class TagsTest(TestCase):
         """
         crumb_parts = ['<div id="breadcrumbs">']
         add_crumb_part = crumb_parts.append
-        for parent in self.response_not_index_article.parents(True):
+        for parent in self.response_visible_article.parents(True):
             add_crumb_part("&gt;")
             add_crumb_part("<a")
             add_crumb_part("href=\"%s\"" % parent.get_absolute_url())
             add_crumb_part("</a>")
 
         last_index = 0
-        content_find = self.response_not_index.content.find
+        content_find = self.response_visible.content.find
         for part in crumb_parts:
             index = content_find(part, last_index)
             self.assertTrue(
