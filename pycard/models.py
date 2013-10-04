@@ -96,7 +96,7 @@ class Article(Model):
 
     def visible_sub_articles(self):
         """
-        Returns al list of all sub articles (children) that not hidden.
+        Returns a list of all sub articles (children) that not hidden.
         """
         return self.children.filter(hide=False)
 

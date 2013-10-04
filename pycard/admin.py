@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from django.contrib.admin import site, ModelAdmin
 from django.forms import ModelForm
 from pycard.models import (MenuItem, Article, Attachment, Configuration,
