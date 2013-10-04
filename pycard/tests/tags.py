@@ -125,6 +125,31 @@ class TagsTest(TestCase):
                         )
                     )
 
+    def test_breadcrumbs(self):
+        """
+        Tests presence and correctness (roughly) of breadcrumbs in HTML.
+
+        Quite primitive check but should be adequate for now.
+        """
+        crumb_parts = ['<div id="breadcrumbs">']
+        add_crumb_part = crumb_parts.append
+        for parent in self.response_not_index_article.parents(True):
+            add_crumb_part("&gt;")
+            add_crumb_part("<a")
+            add_crumb_part("href=\"%s\"" % parent.get_absolute_url())
+            add_crumb_part("</a>")
+
+        last_index = 0
+        content_find = self.response_not_index.content.find
+        for part in crumb_parts:
+            index = content_find(part, last_index)
+            self.assertTrue(
+                index > -1,
+                "'%s' not found in response (search started at index %u)." % (
+                part, last_index)
+            )
+            last_index = index
+
     def test_get_configuration_str(self):
         """
         Tests if string configurations are present through
