@@ -136,11 +136,16 @@ a:hover {
     text-align: right;
 }
 
-.sub_articles_list li > a.headline {
+.sub_articles_list li > a.headline,
+.sub_articles_list li > span.headline {
     color: #000000;
     font-weight: bold;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
+}
+
+.sub_articles_list li > a.headline {
+    border-bottom: 1px solid #ccc;
 }
 
 .sub_articles_list li > a.headline:hover {
