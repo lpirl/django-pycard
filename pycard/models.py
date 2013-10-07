@@ -132,6 +132,21 @@ class Article(Model):
 
         return  url_without_path.replace(self.slug, url_with_path)
 
+    def needs_link(self):
+        """
+        Method determines if the articles view needs to be linked.
+
+        Ex, articles w/o any content or attachments or … do not need to
+        be linked as a visit would be pointless.
+        """
+        if self.content:
+            return True
+        if self.attachments.all().exists():
+            return True
+        if self.children.all().exists():
+            return True
+        return False
+
     def __unicode__(self):
         if self.hide:
             return "(%s)" % unicode(self.headline)

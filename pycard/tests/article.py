@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from django.test import TestCase
 
 from pycard.models import Article
@@ -29,3 +31,12 @@ class ArticleTest(TestCase):
             CORRECT_PATH_ARTICLES,
             leaf_article.parents(True)
         )
+
+    def test_needs_link(self):
+        """
+        Should test needs_link(), BUT …
+
+        … seems to be only testable with same code -> intentionally left
+        blank so far.
+        """
+        pass

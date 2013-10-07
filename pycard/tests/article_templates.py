@@ -66,6 +66,36 @@ class ArticleTemplateTest(TestCase):
 
         self.assertTrue(position_top < position_bottom)
 
+    def test_subarticle_list_links(self):
+        """
+        Tests if sub articles lists link to articles accordingly
+        (ie: no link if article does not require it).
+        """
+        article = Article.objects.all().filter(
+            headline='Level 1 Article 1')[0]
+
+        child_with_link = None
+        child_without_link = None
+        for child in article.children.all():
+            if child.needs_link() and not child.hide:
+                child_with_link = child
+            else:
+                child_without_link = child
+
+        self.assertIsNotNone(child_with_link)
+        self.assertIsNotNone(child_without_link)
+
+        response = self.client.get(article.get_absolute_url())
+
+        self.assertContains(
+            response,
+            child_with_link.get_absolute_url()
+        )
+        self.assertNotContains(
+            response,
+            child_without_link.get_absolute_url()
+        )
+
     def test_article_attachments(self):
         """
         Tests if articles attachments are displayed
