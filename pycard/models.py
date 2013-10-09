@@ -72,7 +72,7 @@ class Article(Model):
         related_name='children', help_text="Article listed there.")
 
     sort_priority = IntegerField(null=True, blank=True, editable=True,
-        default=lambda: Article.max_sort_priority()+10,
+        default=0,
         help_text="Position in sub article list (highest = top).")
 
     sub_articles_list_top = BooleanField(editable=True)
@@ -82,18 +82,6 @@ class Article(Model):
 
     class Meta:
         ordering = ['-sort_priority']
-
-    @classmethod
-    def max_sort_priority(cls):
-        """
-        Returns the highest value set as sort_priority.
-        """
-        priorities = cls.objects.all().order_by(
-            "-sort_priority"
-        ).values_list(
-            "sort_priority", flat=True
-        )
-        return priorities[0] if priorities else 0
 
     def visible_sub_articles(self):
         """
