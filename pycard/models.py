@@ -88,11 +88,12 @@ class Article(Model):
         """
         Returns the highest value set as sort_priority.
         """
-        cls.objects.all().order_by(
+        priorities = cls.objects.all().order_by(
             "-sort_priority"
         ).values_list(
             "sort_priority", flat=True
-        )[0]
+        )
+        return priorities[0] if priorities else 0
 
     def visible_sub_articles(self):
         """
