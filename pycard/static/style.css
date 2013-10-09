@@ -130,7 +130,7 @@ a:hover {
     margin: 1em 0em 1em 1em;
 }
 
-.sub_articles_list li > a.url {
+a.url {
     display: block;
     margin-top: 1em;
     text-align: right;

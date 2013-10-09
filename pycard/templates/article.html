@@ -46,6 +46,15 @@
     </div>
 {% endif %}
 
+{% if article.url %}
+    <a  class="url"
+        href="{{ article.url }}"
+        target="_blank"
+        title="external URL page for '{{ article.headline }}'">
+            {{ article.url }}
+    </a>
+{% endif %}
+
 {% block article_bottom %}{% endblock %}
 
 {% endblock content_container %}

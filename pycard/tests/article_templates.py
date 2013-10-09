@@ -139,3 +139,17 @@ class ArticleTemplateTest(TestCase):
             article.headline,
             count=2 # html title & in content
         )
+
+    def test_article_url(self):
+        """
+        Tests if articles headline is displayed
+        """
+        article_qs = Article.objects.filter(url__isnull=False)
+        self.assertTrue(article_qs.exists())
+        article = article_qs[0]
+        response = self.client.get(article.get_absolute_url())
+
+        self.assertContains(
+            response,
+            article.url
+        )
