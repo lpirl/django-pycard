@@ -5,5 +5,6 @@
             {% autoescape off %}&gt;{% endautoescape %}
             <a href="{{ crumb.get_absolute_url }}">{{crumb.headline|truncatechars:16}}</a>
         {% endfor %}
+        {% autoescape off %}&gt;{% endautoescape %}
     {% endif %}
 </div>

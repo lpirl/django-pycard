@@ -62,7 +62,7 @@ register.inclusion_tag('menu.html')(menu)
 def breadcrumbs(to_article=None):
 
     if to_article:
-        crumbs = to_article.parents(True)
+        crumbs = to_article.parents()
     else:
         crumbs = None
 

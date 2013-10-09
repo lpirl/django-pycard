@@ -152,4 +152,10 @@ a:hover {
     text-decoration: none;
 }
 
+h1.article_headline {
+    font-size: 2em;
+    margin-top: 0em;
+    color: #ccc;
+}
+
 /* #################### END content #################### */

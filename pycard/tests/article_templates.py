@@ -115,7 +115,7 @@ class ArticleTemplateTest(TestCase):
 
     def test_article_content(self):
         """
-        Tests if articles attachments are displayed
+        Tests if articles content is displayed
         """
         article = Article.objects.get(pk=12)
         self.assertNotEqual(article.content, "")
@@ -124,4 +124,18 @@ class ArticleTemplateTest(TestCase):
         self.assertContains(
             response,
             article.content
+        )
+
+    def test_article_headline(self):
+        """
+        Tests if articles headline is displayed
+        """
+        article = Article.objects.get(pk=12)
+        self.assertNotEqual(article.headline, "")
+        response = self.client.get(article.get_absolute_url())
+
+        self.assertContains(
+            response,
+            article.headline,
+            count=2 # html title & in content
         )

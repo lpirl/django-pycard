@@ -32,3 +32,7 @@ div.contents ul {
 	list-style-type: none;
 	padding-left: 2em;
 }
+
+table.field-list th.field-name {
+	padding-right: 1em
+}

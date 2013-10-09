@@ -147,7 +147,7 @@ class TagsTest(TestCase):
         """
         crumb_parts = ['<div id="breadcrumbs">']
         add_crumb_part = crumb_parts.append
-        for parent in self.response_visible_article.parents(True):
+        for parent in self.response_visible_article.parents():
             add_crumb_part("&gt;")
             add_crumb_part("<a")
             add_crumb_part("href=\"%s\"" % parent.get_absolute_url())
