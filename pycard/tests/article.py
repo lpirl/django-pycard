@@ -40,3 +40,15 @@ class ArticleTest(TestCase):
         blank so far.
         """
         pass
+
+    def test_creation(self):
+        """
+        Tests creation of articles.
+
+        This is useful because wrong default values (ex. lambdas) may
+        break object creation.
+        """
+        a = Article()
+        self.assertIsNone(a.pk)
+        a.save()
+        self.assertIsNotNone(a.pk)
