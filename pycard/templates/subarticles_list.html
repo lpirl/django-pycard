@@ -1,3 +1,5 @@
+{% load markup %}
+
 {% if sub_articles.count %}
     <ul>
     {% for sub_article in sub_articles %}
@@ -15,7 +17,7 @@
             {% endif %}
 
             <p class="teaser">
-                {{ sub_article.teaser }}
+                {{ sub_article.teaser | restructuredtext  }}
             </p>
             {% if sub_article.url %}
                 <a  class="url"
