@@ -16,9 +16,9 @@
                 </span>
             {% endif %}
 
-            <p class="teaser">
+            <div class="teaser">
                 {{ sub_article.teaser | restructuredtext  }}
-            </p>
+            </div>
             {% if sub_article.url %}
                 <a  class="url"
                     href="{{ sub_article.url }}"

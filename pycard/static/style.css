@@ -126,8 +126,8 @@ a:hover {
     padding: 0;
 }
 
-.sub_articles_list li > p.teaser {
-    margin: 1em 0em 1em 1em;
+.sub_articles_list li > div.teaser {
+    margin: 1em 0em 1em 0.5em;
 }
 
 a.url {
@@ -139,9 +139,10 @@ a.url {
 .sub_articles_list li > a.headline,
 .sub_articles_list li > span.headline {
     color: #000000;
+    display: inline-block;
     font-weight: bold;
     margin-top: 1.5em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0em;
 }
 
 .sub_articles_list li > a.headline {
