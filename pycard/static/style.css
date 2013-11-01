@@ -160,4 +160,14 @@ h1.article_headline {
     color: #ccc;
 }
 
+div.attachments p {
+    display: block;
+    margin: 0.2em 0em 0.2em 1em;
+}
+
+div.attachments > p:first-child {
+    font-weight: bolder;
+    margin-left: 0em;
+}
+
 /* #################### END content #################### */

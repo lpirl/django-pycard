@@ -38,10 +38,13 @@
 {% endif %}
 
 {% if article.attachments.count > 0 %}
-    <div class="attachements">
+    <div class="attachments">
         <p>Attachments:</p>
         {% for attachment in article.attachments.all %}
-            {{ attachment }}
+            <p><a href="{{ attachment.data.url }}"
+                {% if attachment.description %}
+                title="{{ attachment.description }}"
+                {% endif %}>{{ attachment.name }}</a></p>
         {% endfor %}
     </div>
 {% endif %}
