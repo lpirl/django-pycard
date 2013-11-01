@@ -133,7 +133,6 @@ a:hover {
 a.url {
     float: right;
     display: inline-block;
-    margin-top: 1em;
     text-align: right;
 }
 
@@ -142,7 +141,7 @@ a.url {
     color: #000000;
     display: inline-block;
     font-weight: bold;
-    margin-top: 1.5em;
+    margin-top: 3em;
     margin-bottom: 0em;
 }
 
