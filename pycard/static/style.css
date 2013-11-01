@@ -131,7 +131,8 @@ a:hover {
 }
 
 a.url {
-    display: block;
+    float: right;
+    display: inline-block;
     margin-top: 1em;
     text-align: right;
 }
