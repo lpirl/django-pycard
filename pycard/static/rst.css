@@ -36,3 +36,20 @@ div.contents ul {
 table.field-list th.field-name {
 	padding-right: 1em
 }
+
+tt {
+	padding: 0.2em;
+}
+
+.literal{
+	font-size: 0.9em;
+	color: black;
+}
+
+.highlight {
+	border: 1px solid #ccc;
+	background-color: rgba(0, 0, 0, 0.01);
+	padding: 0em 1.33em;
+	font-size: 0.9em;
+	line-height: 1.25em;
+}
