@@ -55,7 +55,7 @@ class Article(Model):
         max_length=64, unique=True, help_text="Used in URL.")
 
     teaser = CharField(null=False, blank=True, editable=True,
-                       max_length=256)
+                       max_length=1024)
 
     content = TextField(null=False, blank=True, editable=True)
 
