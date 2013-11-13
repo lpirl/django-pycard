@@ -75,10 +75,10 @@ class Article(Model):
         default=0,
         help_text="Position in sub article list (highest = top).")
 
-    sub_articles_list_top = BooleanField(editable=True)
-    sub_articles_list_bottom = BooleanField(editable=True)
+    sub_articles_list_top = BooleanField(editable=True, default=False)
+    sub_articles_list_bottom = BooleanField(editable=True, default=True)
     hide = BooleanField(editable=True, help_text="Hides article in " +
-        "lists but it will be still accessible.")
+        "lists but it will be still accessible.", default=False)
 
     class Meta:
         ordering = ['-sort_priority']
