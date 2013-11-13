@@ -1,0 +1,32 @@
+#photography_previews a {
+	display: inline-block;
+	position: relative;
+}
+
+#photography_previews a img {
+	height: 3em;
+	border: 1px solid #ccc;
+}
+
+#selected_image {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	z-index: -100;
+}
+
+.background_square {
+	display: none;
+}
+
+#menu .square {
+	background-color: rgba(255, 255, 255, 0.75);
+}
+
+div.attachments {
+	display: none;
+	z-index: -200;
+}

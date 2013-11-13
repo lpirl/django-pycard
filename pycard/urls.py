@@ -13,5 +13,7 @@ urlpatterns = patterns('',
     ),
     url(r'^$', 'pycard.views.index'),
     url(r'^(contact)/$', 'pycard.views.contact'),
+    url(r'^(other/photography)/$', 'pycard.views.photography'),
+    url(r'^(other/photography)/(\d+)/([^/]+)$', 'pycard.views.photography'),
     url(r'^(.+)/$', 'pycard.views.article'),
 )

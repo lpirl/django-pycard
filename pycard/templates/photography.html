@@ -1,0 +1,33 @@
+{% extends "article.html" %}
+
+{% load photography_tags %}
+
+{% block article_post_content %}
+
+<link href="/static/photography.css" type="text/css" media="all" rel="stylesheet" />
+
+<div id="photography_previews">
+{% for media in article.content_media.all %}
+	{% is_path_to_image media.data.url as is_image %}
+	{% if is_image %}
+		<a	href="{{ article.get_absolute_url }}{{ media.pk }}/{% filename media.data.url %}"
+			style="	z-index: {% random_int 0 100 %}px;
+					top: {% random_int 20 30 %}px;
+					margin-left: {% random_int 0 30 %}px;">
+			<img	src="{{ media.data.url }}"
+					alt="enlarge '{{ media.data.url }}'">
+		</a>
+	{% endif %}
+{% endfor %}
+</div>
+
+{% if selected_image %}
+<div	id="selected_image"
+		style="	background: url({{ selected_image.data.url }}) no-repeat center center fixed;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;"></div>
+{% endif %}
+
+{% endblock %}

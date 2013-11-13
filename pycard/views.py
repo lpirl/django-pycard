@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.conf import settings
 
-from pycard.models import Article
+from pycard.models import Article, ContentMedia
+from pycard.templatetags import photography_tags
 
 def get_article_or_404(slug):
     """
@@ -57,6 +58,30 @@ def article(request, request_path):
         'article.html',
         {
             'article': requested_article,
+        }
+    )
+
+def photography(request, request_path, image_pk=None, image_name=""):
+    from django.http import Http404
+    slug_list = get_slug_list_from_request_path(request_path)
+
+    requested_article = get_article_from_slug_list(slug_list)
+
+    if not requested_article:
+        raise Http404('No article matches the given query.')
+
+    image = None
+    if image_pk is not None:
+        image = get_object_or_404(ContentMedia, pk=image_pk)
+        if photography_tags.filename(image.data.url) != image_name:
+            raise Http404('No image matches the given query.')
+
+    return render(
+        request,
+        'photography.html',
+        {
+            'article': requested_article,
+            'selected_image': image,
         }
     )
 
