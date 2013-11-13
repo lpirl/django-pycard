@@ -132,6 +132,8 @@ class Article(Model):
             return True
         if self.attachments.all().exists():
             return True
+        if self.content_media.all().exists():
+            return True
         if self.children.all().exists():
             return True
         return False
