@@ -1,4 +1,4 @@
-{% load markup %}
+{% load rstify_tags %}
 
 {% if sub_articles.count %}
     <ul>
@@ -17,7 +17,7 @@
             {% endif %}
 
             <div class="teaser">
-                {{ sub_article.teaser | restructuredtext  }}
+                {{ sub_article.teaser | rstify  }}
             </div>
             {% if sub_article.url %}
                 <a  class="url"

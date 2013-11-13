@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% load markup %}
+{% load rstify_tags %}
 {% load base_tags %}
 
 {% block title_prefix %}{{ article.headline }} | {% endblock %}
@@ -27,7 +27,9 @@
 {% block article_pre_content %}{% endblock %}
 
 <div class="content">
-    {{article.content | restructuredtext }}
+    {% block article_content %}
+        {{article.content | rstify }}
+    {% endblock article_content %}
 </div>
 
 {% block article_post_content %}{% endblock %}
