@@ -1,4 +1,5 @@
 # encoding: utf-8
+from os.path import basename
 from decimal import Decimal
 from django.db.models import (  Model, IntegerField, ForeignKey,
                                 CharField, BooleanField, FileField,
@@ -153,11 +154,11 @@ class Attachment(Model):
                         upload_to="attachments", max_length=256)
 
     def __unicode__(self):
-        return self.name
+        return unicode(self.__class__.name + basename(self.name))
 
 class ContentMedia(Model):
     data = FileField(    blank=False, editable=True,
                         upload_to="content_media", max_length=256)
 
     def __unicode__(self):
-        return self.data.url.replace(self.data.field.upload_to, "")
+        return unicode(self.__class__.name + basename(self.name))
