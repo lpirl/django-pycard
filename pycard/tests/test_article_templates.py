@@ -8,7 +8,7 @@ class ArticleTemplateTest(TestCase):
     """
     Tests for the display of an article
     """
-    fixtures = ["test_data/article.json"]
+    fixtures = ["test_article.json"]
 
     def test_subarticle_list_count(self):
         """

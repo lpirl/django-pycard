@@ -8,7 +8,7 @@ class ArticleTest(TestCase):
     """
     Tests for the model Article
     """
-    fixtures = ["test_data/article.json"]
+    fixtures = ["test_article.json"]
 
     def test_parents(self):
         """

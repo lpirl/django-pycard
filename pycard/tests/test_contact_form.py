@@ -10,7 +10,7 @@ class ContactFormTest(TestCase):
     """
     Tests for the contact form
     """
-    fixtures = ["test_data/contact.json"]
+    fixtures = ["test_contact.json"]
     
     def setUp(self):
         self.article = Article.objects.get(slug="contact")

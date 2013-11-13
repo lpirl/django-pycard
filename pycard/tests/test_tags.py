@@ -11,8 +11,8 @@ class TagsTest(TestCase):
     """
     Tests for the templatetags module
     """
-    fixtures = ["test_data/article.json", "test_data/configuration.json",
-                "test_data/menu_items.json"]
+    fixtures = ["test_article.json", "test_configuration.json",
+                "test_menu_items.json"]
     
     def setUp(self):
         self.response_index = self.client.get("/")

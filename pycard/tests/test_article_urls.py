@@ -11,7 +11,7 @@ class ArticleUrlTest(TestCase):
     This sis somehow interesting because this app resolves some URLs
     itself.
     """
-    fixtures = ["test_data/article.json"]
+    fixtures = ["test_article.json"]
     
     def setUp(self):
         self.valid_url = "/level1_1/level2_1/level3_1/?query=foo#section"
