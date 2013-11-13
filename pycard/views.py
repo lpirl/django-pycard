@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.conf import settings
 
-from pycard.models import Article, ContentMedia
+from pycard.models import Article
 from pycard.templatetags import photography_tags
 
 def get_article_or_404(slug):
@@ -50,7 +50,6 @@ def article(request, request_path):
     requested_article = get_article_from_slug_list(slug_list)
 
     if not requested_article:
-        from django.http import Http404
         raise Http404('No article matches the given query.')
 
     return render(
@@ -62,7 +61,9 @@ def article(request, request_path):
     )
 
 def photography(request, request_path, image_pk=None, image_name=""):
-    from django.http import Http404
+    from math import sqrt, ceil
+    from pycard.models import Article, ContentMedia
+
     slug_list = get_slug_list_from_request_path(request_path)
 
     requested_article = get_article_from_slug_list(slug_list)
@@ -82,6 +83,9 @@ def photography(request, request_path, image_pk=None, image_name=""):
         {
             'article': requested_article,
             'selected_image': image,
+            'table_size': int(ceil(sqrt(
+                requested_article.content_media.count()
+            )))
         }
     )
 

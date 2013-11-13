@@ -6,28 +6,30 @@
 
 <link href="/static/photography.css" type="text/css" media="all" rel="stylesheet" />
 
-<div id="photography_previews">
+<table id="photography_previews"><tr>
 {% for media in article.content_media.all %}
-	{% is_path_to_image media.data.url as is_image %}
-	{% if is_image %}
+	<td>
 		<a	href="{{ article.get_absolute_url }}{{ media.pk }}/{% filename media.data.url %}"
-			style="	z-index: {% random_int 0 100 %}px;
-					top: {% random_int 20 30 %}px;
-					margin-left: {% random_int 0 30 %}px;">
-			<img	src="{{ media.data.url }}"
-					alt="enlarge '{{ media.data.url }}'">
+			style="	background-image: url({{ media.data.url }});">
 		</a>
-	{% endif %}
+	</td>
+	{% if forloop.counter|divisibleby:table_size %}
+		</tr><tr>
+	{% endif  %}
 {% endfor %}
-</div>
+</tr></table>
 
 {% if selected_image %}
-<div	id="selected_image"
-		style="	background: url({{ selected_image.data.url }}) no-repeat center center fixed;
-				-webkit-background-size: cover;
-				-moz-background-size: cover;
-				-o-background-size: cover;
-				background-size: cover;"></div>
+	<style>
+	#root_container {
+		background-color: rgba(0, 0, 0, 0.5);
+		border: 1px solid #ccc;
+	}
+	#selected_image {
+		background-image: url({{ selected_image.data.url }});
+	}
+	</style>
+	<div id="selected_image"></div>
 {% endif %}
 
 {% endblock %}

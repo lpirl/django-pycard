@@ -10,12 +10,12 @@ body, input, textarea {
     line-height: 1.5em;
 }
 
-div#root_container {
+#root_container {
     position: relative;
     display: block;
     width: 50em;
-    padding-left: 2em;
     margin: 1em auto;
+    padding: 1em 2em;    
 }
 
 .square {
@@ -27,7 +27,7 @@ div.background_square {
     position: fixed;
 }
 
-div#menu {
+#menu {
     position: relative;
     display: inline-block;
     width: 100%;
@@ -35,27 +35,28 @@ div#menu {
     margin-left: -2em;
 }
 
-div#menu_spacer_vertically_center {
+#menu_spacer_vertically_center {
     position: relative;
     display: block;
     height: 10em;
 }
 
-div#breadcrumbs {
+#breadcrumbs {
     position: absolute;
     bottom: 0px;
-    color: #ccc
+    color: #ccc;
+    left: 1em;
 }
 
-div#breadcrumbs > a {
+#breadcrumbs > a {
     color: inherit;
 }
 
-div#breadcrumbs > a:hover {
+#breadcrumbs > a:hover {
     text-decoration: none;
 }
 
-div#menu > a {
+#menu > a {
     position: absolute;
     padding: 0.25em;
     text-align: center;
@@ -68,31 +69,31 @@ div#menu > a {
     text-decoration: none;
 }
 
-div#menu > a:hover,
-div#menu > a.active {
+#menu > a:hover,
+#menu > a.active {
     border-color: #ccc;
 }
 
-div#logo {
+#logo {
     position: absolute;
-    top: 4em;
-    left: 0;
+    top: 5em;
+    left: 1em;
     z-index: 100;
 }
 
-div#logo > a {
+#logo > a {
     text-decoration: none;
     display: block;
     color: #ccc;
 }
 
-a#logo_name {
+#logo_name {
     font-size: 2.5em;
     letter-spacing: 0.6em;
     font-weight: bolder;
 }
 
-a#logo_text {
+#logo_text {
     margin: 0.3em 3em;
     font-size: 0.8em;
 }

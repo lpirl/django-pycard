@@ -1,10 +1,30 @@
-#photography_previews a {
-	display: inline-block;
+#photography_previews {
 	position: relative;
+	margin: 0 auto;
 }
 
-#photography_previews a img {
+#photography_previews a,
+#selected_image {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#photography_previews tr,
+#photography_previews td {
+	line-height: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#photography_previews td {
+	padding: .5em;
+}
+
+#photography_previews a {
+	display: block;
 	height: 3em;
+	width: 3em;
 	border: 1px solid #ccc;
 }
 
@@ -16,17 +36,13 @@
 	width: 100%;
 	margin: 0px;
 	z-index: -100;
+	background-attachment: fixed;
 }
 
 .background_square {
-	display: none;
-}
-
-#menu .square {
-	background-color: rgba(255, 255, 255, 0.75);
+	z-index: -1000;
 }
 
 div.attachments {
 	display: none;
-	z-index: -200;
 }
