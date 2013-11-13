@@ -1,10 +1,12 @@
 {% extends "article.html" %}
 
 {% load photography_tags %}
+{% load staticfiles %}
 
 {% block article_post_content %}
 
-<link href="/static/photography.css" type="text/css" media="all" rel="stylesheet" />
+<link href="{% static 'photography.css' %}" type="text/css" media="all"
+	rel="stylesheet" />
 
 <table id="photography_previews"><tr>
 {% for media in article.content_media.all %}
