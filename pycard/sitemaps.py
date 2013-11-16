@@ -6,7 +6,10 @@ class ArticleSitemap(Sitemap):
     priority = 1
 
     def items(self):
-        return Article.objects.filter(hide=False)
+        return filter(
+            lambda a: a.needs_link(),
+            Article.objects.filter(hide=False)
+        )
 
     def lastmod(self, obj):
         return obj.date_modified
