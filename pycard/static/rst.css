@@ -3,25 +3,26 @@ div.system-message {
 }
 
 .content > h1 {
-	font-size:1.5em;
-}
-
-.content > h2 {
 	font-size:1.25em;
 }
 
+.content > h2,
 .content > h3,
 .content > h4,
 .content > h5 {
 	font-size:1.125em;
 }
 
-.content > h4 {
+.content > h3 {
 	padding-left: 1em;
 }
 
-.content > h5 {
+.content > h4 {
 	padding-left: 2em;
+}
+
+.content > h5 {
+	padding-left: 3em;
 }
 
 a.toc-backref:link, a.internal:link {
