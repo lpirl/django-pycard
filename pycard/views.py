@@ -92,7 +92,7 @@ def photography(request, request_path, image_pk=None, image_name=""):
 def contact(request, slug):
     from pycard.forms import ContactForm
 
-    form = ContactForm(data=request.POST or None)
+    form = ContactForm(data=request.POST or None, label_suffix='')
 
     if form.is_valid():
         from django.core.mail import EmailMessage
