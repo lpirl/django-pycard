@@ -78,6 +78,7 @@ div.figure {
 	margin: 1em auto;
 	padding: 1em;
 	border: 1px solid #ccc;
+	clear: both;
 }
 
 div.figure  p.caption {
