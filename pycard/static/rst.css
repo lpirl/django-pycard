@@ -85,6 +85,7 @@ div.figure img {
 	position: relative;
 }
 
+h1 ~ div.figure,
 h2 ~ div.figure {
 	margin-top: 0.33em;
 }
