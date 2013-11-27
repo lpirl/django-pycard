@@ -80,6 +80,10 @@ div.figure {
 	border: 1px solid #ccc;
 }
 
+div.figure  p.caption {
+	margin-bottom: 0;
+}
+
 div.figure img {
 	width: 100%;
 	position: relative;
