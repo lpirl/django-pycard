@@ -1,3 +1,7 @@
+body, textarea, input {
+	color: #ccc;
+}
+
 #photography_previews {
 	position: relative;
 	margin: 0 auto;
